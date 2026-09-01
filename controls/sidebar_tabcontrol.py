@@ -23,8 +23,10 @@ class SidebarTabControl(wx.Control):
 
         # Color Scheme
         self.color_bg = wx.Colour(22, 27, 34)              # Sidebar Background
+        self.color_hover_bg = wx.Colour(35,42, 52)         # Highlight Background on hover
         self.color_text_normal = wx.Colour(160, 165, 175)  # Text & Icon normal
         self.color_text_active = wx.Colour(255, 255, 255)  # Active text
+        self.color_text_hover = wx.Colour(210, 215, 226)   # Hover Text
         self.color_orange = wx.Colour(235, 130, 20)        # Line color & orange accent
 
         # Gradient colour active Tab
@@ -38,12 +40,13 @@ class SidebarTabControl(wx.Control):
         self.Bind(wx.EVT_MOTION, self.OnMouseMotion)
         self.Bind(wx.EVT_LEAVE_WINDOW, self.OnMouseLeave)
 
-    def AddTab(self, label, bitmap_normal=None, bitmap_active=None):
+    def AddTab(self, label, bitmap_normal=None, bitmap_hover=None, bitmap_active=None):
         """ Add Tab to sidenar """
         self.tabs.append({
             'label': label,
             'bmp_normal': bitmap_normal,
-            'bmp_active': bitmap_active
+            'bmp_hover': bitmap_hover or bitmap_normal,
+            'bmp_active': bitmap_active or bitmap_normal
         })
         self.Refresh()
 
@@ -74,13 +77,14 @@ class SidebarTabControl(wx.Control):
         width, height = self.GetClientSize()
         
         # Font setup
-        font = wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+        font = wx.Font(10, wx.FONTF, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
         gc.SetFont(font, self.color_text_normal)
 
         for i, tab in enumerate(self.tabs):
             y = i * self.item_height
             rect = wx.Rect(0, y, width, self.item_height)
             is_selected = (i == self.selected_index)
+            is_hover = (i == self.hover_index and not is_selected)
 
             # Draw Selected Tab Background & Accent
             if is_selected:
@@ -97,8 +101,20 @@ class SidebarTabControl(wx.Control):
                 gc.SetBrush(gc.CreateBrush(wx.Brush(self.color_orange)))
                 gc.DrawRoundedRectangle(0, y + 4, 4, self.item_height - 8, 2)
 
+            elif is_hover:
+                # thin background highlight on hover
+                gc.SetBrush(gc.CreateBrush(wx.Brush(self.color_hover_bg)))
+                gc.SetPen(wx.NullPen)
+                gc.DrawRoundedRectangle(4, y + 2, width - 8, self.item_height -4, 4)
+
             # Draw Bitmap / Icon (jika ada)
-            bmp = tab['bmp_active'] if is_selected else tab['bmp_normal']
+            if is_selected:
+                bmp = tab['bmp_active']
+            elif is_hover:
+                bmp = tab['bmp_hover']
+            else:
+                bmp = tab['bmp_normal']
+
             x_offset = self.padding_left + 8
             
             if bmp and bmp.IsOk():
@@ -108,7 +124,13 @@ class SidebarTabControl(wx.Control):
                 x_offset += 24  # Placeholder spasi jika tidak ada gambar
 
             # Draw Label Text
-            text_color = self.color_orange if is_selected else self.color_text_normal
+            if is_selected:
+                text_color = self.color_orange
+            elif is_hover:
+                text_color = self.color_text_hover
+            else:
+                text_color = self.color_text_normal
+
             gc.SetFont(font, text_color)
             
             # Vertically center text
@@ -123,14 +145,24 @@ class SidebarTabControl(wx.Control):
 
     def OnMouseMotion(self, event):
         y = event.GetY()
-        hover_index = y // self.item_height
-        if 0 <= hover_index < len(self.tabs):
+        new_hover_index = y // self.item_height
+
+        if 0 <= new_hover_index < len(self.tabs):
             self.SetCursor(wx.Cursor(wx.CURSOR_HAND))
         else:
+            new_hover_index = -1
             self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
+
+        # Redraw if hover status changed
+        if new_hover_index != self.hover_index:
+            self.hover_index = new_hover_index
+            self.Refresh()
 
     def OnMouseLeave(self, event):
         self.SetCursor(wx.Cursor(wx.CURSOR_ARROW))
+        if self.hover_index != -1:
+            self.hover_index = -1
+            self.Refresh()
 
     def OnSize(self, event):
         self.Refresh()

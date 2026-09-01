@@ -1,13 +1,18 @@
 import wx
 
 from controls.sidebar_tabcontrol import SidebarTabControl
+from utils.svg_utils import load_svg_as_bitmap
+
+SVG_TRAINING = "assets/icons/helicopter-icon.svg"
+SVG_HISTORY = "assets/icons/training-icon.svg"
+SVG_SESSION = "assets/icons/gear-icon.svg"
 
 class MainFrame(wx.Frame):
     def __init__(self):
         super(MainFrame, self).__init__(
             None,
             title="Helicopter Rescue Simulator",
-            size=(1720, 1440),
+            size=(1366, 768),
         )
         self.SetBackgroundColour(wx.Colour(18, 22, 28))
 
