@@ -77,7 +77,7 @@ class SidebarTabControl(wx.Control):
         width, height = self.GetClientSize()
         
         # Font setup
-        font = wx.Font(10, wx.FONTF, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+        font = wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
         gc.SetFont(font, self.color_text_normal)
 
         for i, tab in enumerate(self.tabs):
