@@ -90,7 +90,7 @@ class SidebarTabControl(wx.Control):
             if is_selected:
                 # 1. Background Gradient Tab Aktif
                 brush = gc.CreateLinearGradientBrush(
-                    0, y, 0, y + self.item_height, 
+                    0, y, width - 8, y, 
                     self.grad_start, self.grad_end
                 )
                 gc.SetBrush(brush)
