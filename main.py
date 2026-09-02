@@ -3,7 +3,7 @@ import wx
 from controls.sidebar_tabcontrol import SidebarTabControl
 from utils.svg_utils import load_svg_as_bitmap
 
-SVG_TRAINING = "assets/icons/helicopter-icon.svg"
+SVG_TRAINING = "assets/icons/helicopter.svg"
 SVG_HISTORY = "assets/icons/training-icon.svg"
 SVG_SESSION = "assets/icons/gear-icon.svg"
 
