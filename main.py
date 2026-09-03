@@ -30,17 +30,17 @@ class MainFrame(wx.Frame):
         HEX_ACTIVE = "#FFFFFF"
 
         # Load svg tab
-        bmp_tr_norm = load_svg_as_bitmap(SVG_TRAINING, HEX_NORMAL, size=(22, 22), is_file=True)
-        bmp_tr_hover = load_svg_as_bitmap(SVG_TRAINING, HEX_HOVER, size=(22, 22), is_file=True)
-        bmp_tr_active = load_svg_as_bitmap(SVG_TRAINING, HEX_ACTIVE, size=(22, 22), is_file=True)
+        bmp_tr_norm = load_svg_as_bitmap(SVG_TRAINING, HEX_NORMAL, size=(20, 20), is_file=True)
+        bmp_tr_hover = load_svg_as_bitmap(SVG_TRAINING, HEX_HOVER, size=(20, 20), is_file=True)
+        bmp_tr_active = load_svg_as_bitmap(SVG_TRAINING, HEX_ACTIVE, size=(20, 20), is_file=True)
 
-        bmp_hs_norm = load_svg_as_bitmap(SVG_HISTORY, HEX_NORMAL, size=(22, 22), is_file=True)
-        bmp_hs_hover = load_svg_as_bitmap(SVG_HISTORY, HEX_HOVER, size=(22, 22), is_file=True)
-        bmp_hs_active = load_svg_as_bitmap(SVG_HISTORY, HEX_ACTIVE, size=(22, 22), is_file=True)
+        bmp_hs_norm = load_svg_as_bitmap(SVG_HISTORY, HEX_NORMAL, size=(20, 20), is_file=True)
+        bmp_hs_hover = load_svg_as_bitmap(SVG_HISTORY, HEX_HOVER, size=(20, 20), is_file=True)
+        bmp_hs_active = load_svg_as_bitmap(SVG_HISTORY, HEX_ACTIVE, size=(20, 20), is_file=True)
 
-        bmp_ss_norm = load_svg_as_bitmap(SVG_SESSION, HEX_NORMAL, size=(22, 22), is_file=True)
-        bmp_ss_hover = load_svg_as_bitmap(SVG_SESSION, HEX_HOVER, size=(22, 22), is_file=True)
-        bmp_ss_active = load_svg_as_bitmap(SVG_SESSION, HEX_ACTIVE, size=(22, 22), is_file=True)
+        bmp_ss_norm = load_svg_as_bitmap(SVG_SESSION, HEX_NORMAL, size=(20, 20), is_file=True)
+        bmp_ss_hover = load_svg_as_bitmap(SVG_SESSION, HEX_HOVER, size=(20, 20), is_file=True)
+        bmp_ss_active = load_svg_as_bitmap(SVG_SESSION, HEX_ACTIVE, size=(20, 20), is_file=True)
         
         # Add Tab
         self.sidebar.AddTab("Training", bmp_tr_norm, bmp_tr_hover, bmp_tr_active)

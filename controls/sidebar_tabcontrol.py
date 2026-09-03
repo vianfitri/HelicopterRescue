@@ -128,7 +128,7 @@ class SidebarTabControl(wx.Control):
 
             # Draw Label Text
             if is_selected:
-                text_color = self.color_orange
+                text_color = self.color_text_active
             elif is_hover:
                 text_color = self.color_text_hover
             else:
