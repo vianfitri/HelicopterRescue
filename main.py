@@ -23,9 +23,11 @@ class MainFrame(wx.Frame):
         self.sidebar = SidebarTabControl(self, size=(200, -1))
 
         # Color Scheme for icon
-        HEX_NORMAL = "#A0A5AF"
+        #HEX_NORMAL = "#A0A5AF"
+        HEX_NORMAL = "#BFC1C1"
         HEX_HOVER = "#D2D7E1"
-        HEX_ACTIVE = "#EB8214"
+        #HEX_HOVER = "#BFC1C1"
+        HEX_ACTIVE = "#FFFFFF"
 
         # Load svg tab
         bmp_tr_norm = load_svg_as_bitmap(SVG_TRAINING, HEX_NORMAL, size=(22, 22), is_file=True)
