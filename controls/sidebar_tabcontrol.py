@@ -104,6 +104,10 @@ class SidebarTabControl(wx.Control):
                 gc.SetBrush(gc.CreateBrush(wx.Brush(self.color_orange)))
                 gc.DrawRoundedRectangle(4, y + 2, 4, self.item_height - 4, 4)
 
+                # create path
+                path = gc.CreatePath()
+                
+
             elif is_hover:
                 # thin background highlight on hover
                 gc.SetBrush(gc.CreateBrush(wx.Brush(self.color_hover_bg)))
