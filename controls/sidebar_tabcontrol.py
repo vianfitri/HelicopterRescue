@@ -33,7 +33,7 @@ class SidebarTabControl(wx.Control):
 
         # Gradient colour active Tab
         #self.grad_start = wx.Colour(120, 55, 10, 180)      #
-        self.grad_start = wx.Colour(107, 56, 17, 100)      # 
+        self.grad_start = wx.Colour(112, 56, 11, 100)      # 
         #self.grad_end = wx.Colour(70, 30, 5, 60)
         self.grad_end = wx.Colour(22, 30, 41, 100)
 
@@ -107,10 +107,10 @@ class SidebarTabControl(wx.Control):
 
                 # create path
                 path = gc.CreatePath()
-                path.MoveToPoint(4 + 4, y)
-                path.AddArc(4 + 4, y + 4, 4, 1.5 * math.pi, math.pi, False)
-                path.AddLineToPoint(4, y + self.item_height - 8)
-                path.AddArc(4 + 4, self.item_height - 4, 4, math.pi, .5 * math.pi, False)
+                path.MoveToPoint(4 + 4, y + 2)
+                path.AddArc(4 + 4, y + 2 + 4, 4, 1.5 * math.pi, math.pi, False)
+                path.AddLineToPoint(4, y + 2 + self.item_height - 8)
+                path.AddArc(4 + 4, y + 2 + self.item_height - 8, 4, math.pi, .5 * math.pi, False)
                 path.CloseSubpath()
 
                 gc.SetBrush(gc.CreateBrush(wx.Brush(self.color_orange)))
