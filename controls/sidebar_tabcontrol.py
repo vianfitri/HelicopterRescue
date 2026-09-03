@@ -102,7 +102,7 @@ class SidebarTabControl(wx.Control):
 
                 # 2. Garis Vertikal Orange di Kiri
                 gc.SetBrush(gc.CreateBrush(wx.Brush(self.color_orange)))
-                gc.DrawRoundedRectangle(0, y + 4, 4, self.item_height - 8, 2)
+                gc.DrawRoundedRectangle(4, y + 2, 4, self.item_height - 8, 2)
 
             elif is_hover:
                 # thin background highlight on hover
