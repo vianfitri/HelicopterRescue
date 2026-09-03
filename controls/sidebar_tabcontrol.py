@@ -106,7 +106,7 @@ class SidebarTabControl(wx.Control):
 
                 # create path
                 path = gc.CreatePath()
-                
+                path.MoveToPoint(4, y + 2)
 
             elif is_hover:
                 # thin background highlight on hover
