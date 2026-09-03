@@ -18,11 +18,12 @@ class SidebarTabControl(wx.Control):
         self.selected_index = 1 # default selected tab
         self.hover_index = -1
 
-        self.item_height = 48
+        self.item_height = 54
         self.padding_left = 16
 
         # Color Scheme
-        self.color_bg = wx.Colour(22, 27, 34)              # Sidebar Background
+        #self.color_bg = wx.Colour(22, 27, 34)              # Sidebar Background
+        self.color_bg = wx.Colour(8, 15, 25)              # Sidebar Background
         self.color_hover_bg = wx.Colour(35,42, 52)         # Highlight Background on hover
         self.color_text_normal = wx.Colour(160, 165, 175)  # Text & Icon normal
         self.color_text_active = wx.Colour(255, 255, 255)  # Active text
@@ -31,7 +32,8 @@ class SidebarTabControl(wx.Control):
 
         # Gradient colour active Tab
         self.grad_start = wx.Colour(120, 55, 10, 180)      # 
-        self.grad_end = wx.Colour(70, 30, 5, 100)
+        #self.grad_end = wx.Colour(70, 30, 5, 60)
+        self.grad_end = wx.Colour(22, 30, 41, 100)
 
         # Binding Event
         self.Bind(wx.EVT_PAINT, self.OnPaint)
