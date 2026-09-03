@@ -1,4 +1,5 @@
 import wx
+import math
 
 class SidebarTabControl(wx.Control):
     def __init__(
@@ -101,12 +102,19 @@ class SidebarTabControl(wx.Control):
                 gc.DrawRoundedRectangle(4, y + 2, width - 8, self.item_height - 4, 4)
 
                 # 2. Garis Vertikal Orange di Kiri
-                gc.SetBrush(gc.CreateBrush(wx.Brush(self.color_orange)))
-                gc.DrawRoundedRectangle(4, y + 2, 4, self.item_height - 4, 4)
+                #gc.SetBrush(gc.CreateBrush(wx.Brush(self.color_orange)))
+                #gc.DrawRoundedRectangle(4, y + 2, 4, self.item_height - 4, 4)
 
                 # create path
                 path = gc.CreatePath()
-                path.MoveToPoint(4, y + 2)
+                path.MoveToPoint(4 + 4, y)
+                path.AddArc(4 + 4, y + 4, 4, 1.5 * math.pi, math.pi, False)
+                path.AddLineToPoint(4, y + self.item_height - 8)
+                path.AddArc(4 + 4, self.item_height - 4, 4, math.pi, .5 * math.pi, False)
+                path.CloseSubpath()
+
+                gc.SetBrush(gc.CreateBrush(wx.Brush(self.color_orange)))
+                gc.FillPath(path)
 
             elif is_hover:
                 # thin background highlight on hover
