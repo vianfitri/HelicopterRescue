@@ -116,6 +116,17 @@ class SidebarTabControl(wx.Control):
                 gc.SetBrush(gc.CreateBrush(wx.Brush(self.color_orange)))
                 gc.FillPath(path)
 
+                # selected right arrow indicator
+                gc.SetPen(wx.Pen(wx.Colour(255, 94, 19), 2)) # Accent Orange
+                arrow_x = width - 18
+                arrow_y = self.item_height / 2.0
+                arrow_path = gc.CreatePath()
+                arrow_path.MoveToPoint(arrow_x - 3, arrow_y - 4)
+                arrow_path.AddLineToPoint(arrow_x + 1, arrow_y)
+                arrow_path.AddLineToPoint(arrow_x - 3, arrow_y + 4)
+                gc.StrokePath(arrow_path)
+
+
             elif is_hover:
                 # thin background highlight on hover
                 gc.SetBrush(gc.CreateBrush(wx.Brush(self.color_hover_bg)))
