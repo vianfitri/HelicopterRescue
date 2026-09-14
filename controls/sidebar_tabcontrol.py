@@ -107,7 +107,7 @@ class SidebarTabControl(wx.Control):
 
                 # create path
                 path = gc.CreatePath()
-                path.MoveToPoint(4 + 4, y + 2)
+                path.MoveToPoint(4 + 4, y + 82)
                 path.AddArc(4 + 4, y + 2 + 4, 4, 1.5 * math.pi, math.pi, False)
                 path.AddLineToPoint(4, y + 2 + self.item_height - 8)
                 path.AddArc(4 + 4, y + 2 + self.item_height - 8, 4, math.pi, .5 * math.pi, False)
