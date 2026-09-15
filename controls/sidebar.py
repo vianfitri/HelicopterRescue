@@ -22,6 +22,11 @@ class SidebarControl(wx.Panel):
     def _init_ui(self):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
 
+        self.SetSizer(main_sizer)
+
+        # Activate initial tab (0)
+        self.select_tab(0)
+
     def _on_tab_click(self, event):
         tab_id = event.tab_id
         self.select_tab(tab_id)
@@ -35,7 +40,7 @@ class SidebarControl(wx.Panel):
 
     def _on_paint(self, event):
         dc = wx.AutoBufferedPaintDC(self)
-        
+
         # Right border line separating sidebar from content
         w, h = self.GetClientSize()
         dc.SetPen(wx.Pen(wx.Colour(43, 49, 61), 1))
