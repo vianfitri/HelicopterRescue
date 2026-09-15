@@ -18,7 +18,7 @@ class IconTestPanel(wx.Panel):
             #IconRenderer.draw_settings(gc, x=200, y=30, size=128, color=wx.Colour(255, 180, 0))
             IconRenderer.draw_plug(gc, x=30, y=30, size=64, color=wx.Colour(0, 255, 0), connected=True)
 
-            IconRenderer.draw_plug(gc, x=30, y=90, size=64, color=wx.Colour(255, 0, 0), connected=False)
+            #IconRenderer.draw_plug(gc, x=30, y=90, size=64, color=wx.Colour(255, 0, 0), connected=False)
 
 
 class MainFrame(wx.Frame):

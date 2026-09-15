@@ -79,7 +79,7 @@ class IconRenderer:
         pin_len = size * 0.14
         wire_len = size * 0.18
         
-        gap = 0.0 if connected else size * 0.16
+        gap = 0.16 if connected else size * 0.16
         
         # ------------------------------------------------------------------
         # 1. Colokan Kiri (Diukur dari pusat lokal 0,0)
@@ -95,32 +95,32 @@ class IconRenderer:
         path_l.CloseSubpath()
         
         # Pin colokan
-        path_l.MoveToPoint(left_front_x, -r * 0.45)
-        path_l.AddLineToPoint(left_front_x + pin_len, -r * 0.45)
-        path_l.MoveToPoint(left_front_x, r * 0.45)
-        path_l.AddLineToPoint(left_front_x + pin_len, r * 0.45)
+        #path_l.MoveToPoint(left_front_x, -r * 0.45)
+        #path_l.AddLineToPoint(left_front_x + pin_len, -r * 0.45)
+        #path_l.MoveToPoint(left_front_x, r * 0.45)
+        #path_l.AddLineToPoint(left_front_x + pin_len, r * 0.45)
         
         # Kabel belakang kiri
-        path_l.MoveToPoint(left_back_x - r, 0)
-        path_l.AddLineToPoint(left_back_x - r - wire_len, 0)
+        #path_l.MoveToPoint(left_back_x - r, 0)
+        #path_l.AddLineToPoint(left_back_x - r - wire_len, 0)
         gc.StrokePath(path_l)
 
         # ------------------------------------------------------------------
         # 2. Colokan Kanan (Diukur dari pusat lokal 0,0)
         # ------------------------------------------------------------------
-        right_front_x = gap / 2.0
-        right_back_x = right_front_x + plug_w
+        #right_front_x = gap / 2.0
+        #right_back_x = right_front_x + plug_w
         
-        path_r = gc.CreatePath()
-        path_r.MoveToPoint(right_front_x, -r)
-        path_r.AddLineToPoint(right_back_x, -r)
-        path_r.AddArc(right_back_x, 0, r, -math.pi / 2, math.pi / 2, False)
-        path_r.AddLineToPoint(right_front_x, r)
-        path_r.CloseSubpath()
+        #path_r = gc.CreatePath()
+        #path_r.MoveToPoint(right_front_x, -r)
+        #path_r.AddLineToPoint(right_back_x, -r)
+        #path_r.AddArc(right_back_x, 0, r, -math.pi / 2, math.pi / 2, False)
+        #path_r.AddLineToPoint(right_front_x, r)
+        #path_r.CloseSubpath()
         
         # Kabel belakang kanan
-        path_r.MoveToPoint(right_back_x + r, 0)
-        path_r.AddLineToPoint(right_back_x + r + wire_len, 0)
-        gc.StrokePath(path_r)
+        #path_r.MoveToPoint(right_back_x + r, 0)
+        #path_r.AddLineToPoint(right_back_x + r + wire_len, 0)
+        #gc.StrokePath(path_r)
 
         gc.PopState()  # Kembalikan state kanvas ke semula
