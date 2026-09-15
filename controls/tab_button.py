@@ -137,18 +137,46 @@ class TabButton(wx.Control):
         
         # Primary Title
         if self.is_selected or self.is_hovered:
-            title_font = Theme.get_font(size=10, bold=True)
-            title_color = Theme.TEXT_PRIMARY
+            #title_font = Theme.get_font(size=10, bold=True)
+            #title_color = Theme.TEXT_PRIMARY
+            title_font = wx.Font(
+                10,
+                wx.FONTFAMILY_SWISS,
+                wx.FONTSTYLE_NORMAL,
+                wx.FONTWEIGHT_BOLD,
+                False,
+                "Segoe UI"
+            )
+            title_color = wx.Colour(255, 255, 255)
         else:
-            title_font = Theme.get_font(size=10, bold=False)
-            title_color = Theme.TEXT_SECONDARY
+            #title_font = Theme.get_font(size=10, bold=False)
+            #title_color = Theme.TEXT_SECONDARY
+            title_font = wx.Font(
+                10,
+                wx.FONTFAMILY_SWISS,
+                wx.FONTSTYLE_NORMAL,
+                wx.FONTWEIGHT_NORMAL,
+                False,
+                "Segoe UI"
+            )
+            title_color = wx.Colour(203, 213, 255)
 
         gc.SetFont(title_font, title_color)
         gc.DrawText(self.label, text_x, h / 2.0 - 16)
 
         # Subtitle
-        sub_font = Theme.get_font(size=8, bold=False)
-        sub_color = Theme.TEXT_MUTED if not self.is_selected else Theme.TEXT_SECONDARY
+        #sub_font = Theme.get_font(size=8, bold=False)
+        #sub_color = Theme.TEXT_MUTED if not self.is_selected else Theme.TEXT_SECONDARY
+        sub_font = wx.Font(
+            8,
+            wx.FONTFAMILY_SWISS,
+            wx.FONTSTYLE_NORMAL,
+            wx.FONTWEIGHT_NORMAL,
+            False,
+            "Segoe UI"
+        )
+        
+        sub_color = wx.Colour(129, 142, 155) if not self.is_selected else wx.Colour(203, 213, 255)
         gc.SetFont(sub_font, sub_color)
         gc.DrawText(self.subtitle, text_x, h / 2.0 + 3)
 
