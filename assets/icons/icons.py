@@ -90,7 +90,7 @@ class IconRenderer:
         path_l = gc.CreatePath()
         path_l.MoveToPoint(left_front_x, -r)
         path_l.AddLineToPoint(left_back_x, -r)
-        path_l.AddArc(left_back_x, 0, r, -math.pi / 2, math.pi / 2, True)
+        path_l.AddArc(left_back_x, 0, r, math.pi / 2, -math.pi / 2, True)
         path_l.AddLineToPoint(left_front_x, r)
         path_l.CloseSubpath()
         
