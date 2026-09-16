@@ -27,6 +27,9 @@ class SidebarControl(wx.Panel):
         # Activate initial tab (0)
         self.select_tab(0)
 
+    def _create_connection_status_card(self):
+        pass
+
     def _on_tab_click(self, event):
         tab_id = event.tab_id
         self.select_tab(tab_id)
