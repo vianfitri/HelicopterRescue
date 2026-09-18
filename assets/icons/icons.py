@@ -58,7 +58,7 @@ class IconRenderer:
         gc.StrokePath(path)
 
     @staticmethod
-    def draw_plug(gc: wx.GraphicsContext, x: float, y: float, size: float, color: wx.Colour, connected: bool = True):
+    def draw_plug(gc: wx.GraphicsContext, x: float, y: float, size: float, color: wx.Colour):
         """
         Draws a power plug icon diagonally at a 45-degree angle.
         """
@@ -79,7 +79,7 @@ class IconRenderer:
         pin_len = size * 0.14
         wire_len = size * 0.18
         
-        gap = 0.16 if connected else size * 0.16
+        gap = 0.16 # if connected else size * 0.16
         
         # ------------------------------------------------------------------
         # 1. Colokan Kiri (Diukur dari pusat lokal 0,0)
