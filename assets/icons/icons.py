@@ -62,37 +62,37 @@ class IconRenderer:
         """
         Draws a power plug icon diagonally at a 45-degree angle.
         """
-        gc.PushState()  # Simpan state kanvas sebelum melakukan transformasi (translasi & rotasi)
+        #gc.PushState()  # Simpan state kanvas sebelum melakukan transformasi (translasi & rotasi)
         
         cx, cy = x + size / 2.0, y + size / 2.0
         
         # Pindahkan koordinat lokal (0,0) ke titik tengah ikon, lalu rotasi -45 derajat (-pi/4)
-        gc.Translate(cx, cy)
-        gc.Rotate(-math.pi / 4)  # Rotasi miring ke atas (45 derajat)
+        #gc.Translate(cx, cy)
+        #gc.Rotate(-math.pi / 4)  # Rotasi miring ke atas (45 derajat)
         
-        gc.SetPen(wx.Pen(color, 2))
+        gc.SetPen(wx.Pen(color, 1))
         gc.SetBrush(wx.NullBrush)
 
-        plug_w = size * 0.26
-        plug_h = size * 0.22
-        r = plug_h / 2.0
-        pin_len = size * 0.14
-        wire_len = size * 0.18
+        #plug_w = size * 0.26
+        #plug_h = size * 0.22
+        #r = plug_h / 2.0
+        #pin_len = size * 0.14
+        #wire_len = size * 0.18
         
-        gap = 0.16 # if connected else size * 0.16
+        #gap = 0.16 # if connected else size * 0.16
         
         # ------------------------------------------------------------------
         # 1. Colokan Kiri (Diukur dari pusat lokal 0,0)
         # ------------------------------------------------------------------
-        left_front_x = -gap / 2.0
-        left_back_x = left_front_x - plug_w
+        #left_front_x = -gap / 2.0
+        #left_back_x = left_front_x - plug_w
         
-        path_l = gc.CreatePath()
-        path_l.MoveToPoint(left_front_x, -r)
-        path_l.AddLineToPoint(left_back_x, -r)
-        path_l.AddArc(left_back_x, 0, r, -1.5 * math.pi, -.5 * math.pi, True)
-        path_l.AddLineToPoint(left_front_x, r)
-        path_l.CloseSubpath()
+        #path_l = gc.CreatePath()
+        #path_l.MoveToPoint(left_front_x, -r)
+        #path_l.AddLineToPoint(left_back_x, -r)
+        #path_l.AddArc(left_back_x, 0, r, -1.5 * math.pi, -.5 * math.pi, True)
+        #path_l.AddLineToPoint(left_front_x, r)
+        #path_l.CloseSubpath()
         
         # Pin colokan
         #path_l.MoveToPoint(left_front_x, -r * 0.45)
@@ -103,7 +103,7 @@ class IconRenderer:
         # Kabel belakang kiri
         #path_l.MoveToPoint(left_back_x - r, 0)
         #path_l.AddLineToPoint(left_back_x - r - wire_len, 0)
-        gc.StrokePath(path_l)
+        #gc.StrokePath(path_l)
 
         # ------------------------------------------------------------------
         # 2. Colokan Kanan (Diukur dari pusat lokal 0,0)
@@ -123,4 +123,26 @@ class IconRenderer:
         #path_r.AddLineToPoint(right_back_x + r + wire_len, 0)
         #gc.StrokePath(path_r)
 
-        gc.PopState()  # Kembalikan state kanvas ke semula
+        #gc.PopState()  # Kembalikan state kanvas ke semula
+
+        path_icn = gc.CreatePath()
+        path_icn.MoveToPoint(6.01298, 6.77501)
+        path_icn.AddCurveToPoint(5.52698, 6.28801, 4.73198, 6.28801, 4.24498, 6.77501)
+        path_icn.AddLineToPoint(4.02498, 6.99501)
+        path_icn.AddCurveToPoint(3.34898, 7.67001, 2.98498, 8.56901, 2.99998, 9.52401)
+        path_icn.AddCurveToPoint(3.01198, 10.28, 3.25998, 10.994, 3.70998, 11.583)
+        path_icn.AddLineToPoint(1.64698, 13.646)
+        path_icn.AddCurveToPoint(1.45198, 13.841, 1.45198, 14.158, 1.64698, 14.353)
+        path_icn.AddCurveToPoint(1.74498, 14.451, 1.87298, 14.499, 2.00098, 14.499)
+        path_icn.AddCurveToPoint(2.12898, 14.499, 2.25698, 14.45, 2.35498, 14.353)
+        path_icn.AddLineToPoint(4.42498, 12.283)
+        path_icn.AddCurveToPoint(5.02198, 12.718, 5.73698, 12.935, 6.46098, 12.935)
+        path_icn.AddCurveToPoint(7.39898, 12.935, 8.34898, 12.572, 9.06498, 11.855)
+        path_icn.AddLineToPoint(9.19598, 11.724)
+        path_icn.AddCurveToPoint(9.68298, 11.237, 9.68298, 10.444, 9.19598, 9.95601)
+        path_icn.AddLineToPoint(6.01398, 6.77401)
+        path_icn.AddLineToPoint(6.01298, 6.77501)
+        path_icn.CloseSubpath()
+
+        gc.StrokePath(path_icn)
+
