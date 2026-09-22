@@ -40,16 +40,18 @@ def rescale_svg_coordinates(input_path: str, output_path: str, target_w: float =
     svg.height = target_h
     svg.viewbox = f"0 0 {target_w} {target_h}"
 
+    output_xml = svg.as_xml() if hasattr(svg, "as_xml") else str(svg)
+
     # Simpan hasil ke file baru
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write(svg.string())
+        f.write(output_xml)
 
     print(f"Proses translasi selesai: {output_path}")
     print(f"Ukuran baru: {target_w}×{target_h} (faktor skala: {scale_x}×)")
 
 if __name__ == "__main__":
-    file_input = "icon_16x16.svg"
-    file_output = "icon_100x100_baked.svg"
+    file_input = "debug_connected.svg"
+    file_output = "debug_connected_100x100_baked.svg"
 
     # Buat file icon_16x16.svg jika file belum ada di folder kerja
     if not os.path.exists(file_input):
