@@ -78,6 +78,12 @@ class TitleBarControl(wx.Panel):
     def _on_paint(self, event):
         dc = wx.AutoBufferedPaintDC(self)
         w, h = self.GetClientSize()
+
+        # Draw Background Color
+        bg_color = wx.Colour(8, 15, 25)
+        dc.SetBackground(wx.Brush(bg_color))
+        dc.Clear()
+        
         # Bottom border
         dc.SetPen(wx.Pen(wx.Colour(43, 49, 61), 1))
         dc.DrawLine(0, h - 1, w, h - 1)
