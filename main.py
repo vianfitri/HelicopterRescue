@@ -1,6 +1,7 @@
 import wx
 
 from controls.sidebar_tabcontrol import SidebarTabControl
+from controls.title_bar import TitleBarControl
 from utils.svg_utils import load_svg_as_bitmap
 
 SVG_TRAINING = "assets/icons/helicopter.svg"
@@ -11,11 +12,27 @@ class MainFrame(wx.Frame):
     def __init__(self):
         super(MainFrame, self).__init__(
             None,
+            id=wx.ID_ANY,
             title="Helicopter Rescue Simulator",
             size=(1366, 768),
+            style=wx.DEFAULT_FRAME_STYLE
         )
-        self.SetBackgroundColour(wx.Colour(18, 22, 28))
 
+        self.SetMinSize((1024, 600))
+        #self.SetBackgroundColour(wx.Colour(18, 22, 28))
+        self.SetBackgroundColour(wx.Colour(17, 19, 23))
+        self.Centre()
+
+        self._init_ui()
+
+    def _init_ui(self):
+        # Vertical root sizer: Top Title Bar + Body
+        root_sizer = wx.BoxSizer(wx.VERTICAL)
+
+        # Top Title Bar Control
+        self.title_bar = TitleBarControl(self)
+        root_sizer.Add(self.title_bar, 0, wx.EXPAND)
+        
         # Main Layout
         main_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
