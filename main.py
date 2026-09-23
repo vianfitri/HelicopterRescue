@@ -21,7 +21,7 @@ class MainFrame(wx.Frame):
 
         self.SetMinSize((1024, 600))
         #self.SetBackgroundColour(wx.Colour(18, 22, 28))
-        self.SetBackgroundColour(wx.Colour(17, 19, 23))
+        #self.SetBackgroundColour(wx.Colour(17, 19, 23))
         self.Centre()
 
         self._init_ui()
