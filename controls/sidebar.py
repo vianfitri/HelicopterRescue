@@ -23,7 +23,11 @@ class SidebarControl(wx.Panel):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         # Header Logo and Title Area
-        
+
+        # Tab Buttons
+        tab_definitions = []
+
+        tabs_sizer = wx.BoxSizer(wx.VERTICAL)
 
         self.SetSizer(main_sizer)
 
