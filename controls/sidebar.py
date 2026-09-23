@@ -22,6 +22,9 @@ class SidebarControl(wx.Panel):
     def _init_ui(self):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
 
+        # Header Logo and Title Area
+        
+
         self.SetSizer(main_sizer)
 
         # Activate initial tab (0)
