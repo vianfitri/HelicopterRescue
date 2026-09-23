@@ -8,10 +8,7 @@ TabSelectEvent, EVT_TAB_SELECTED = wx.lib.newevent.NewCommandEvent()
 
 
 class TabButton(wx.Control):
-    """
-    Modern tactical tab button control for wxPython (inheriting from wx.Control).
-    Displays an icon, primary title, subtitle, and an active Safety Orange indicator bar.
-    """
+
     def __init__(self, parent, tab_id: int, label: str, subtitle: str, icon_type: str):
         super().__init__(
             parent, 
@@ -74,17 +71,25 @@ class TabButton(wx.Control):
 
         # 1. Background color determination
         if self.is_selected:
-            #bg_color = Theme.BG_SIDEBAR_ACTIVE
-            bg_color = wx.Colour(34, 39, 51)
+            # Gradient Background Active Tab
+            grad_start = wx.Colour(112, 56, 11, 100)
+            grad_end = wx.Colour(22, 30, 41, 100)
+            brush = gc.CreateLinearGradientBrush(
+                0, 0, w, 0,
+                grad_start, grad_end
+            )
+
         elif self.is_hovered:
-            #bg_color = Theme.BG_SIDEBAR_HOVER
-            bg_color = wx.Colour(28, 32, 40)
+            # Background brush hover tab
+            bg_color = wx.Colour(35, 42, 52)
+            brush = wx.Brush(bg_color)
         else:
-            #bg_color = Theme.BG_SIDEBAR
+            # Background brush normal tab
             bg_color = wx.Colour(21, 24, 30)
+            brush = wx.Brush(bg_color)
 
         # Fill background with slightly rounded rect if hovered/selected
-        gc.SetBrush(wx.Brush(bg_color))
+        gc.SetBrush(brush)
         gc.SetPen(wx.NullPen)
         gc.DrawRoundedRectangle(4, 2, w - 8, h - 4, 6)
 
