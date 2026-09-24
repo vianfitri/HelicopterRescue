@@ -35,6 +35,8 @@ class TitleBarControl(wx.Panel):
 
         # Title Label
         title_lbl = wx.StaticText(self, label="HELICOPTER RESCUE SIMULATOR")
+        title_lbl.SetBackgroundColour(wx.Colour(8, 15, 25))
+        #title_lbl.SetBackgroundColour(wx.Colour(255, 0, 0))
         title_lbl.SetForegroundColour(wx.Colour(255, 255, 255))
         title_lbl.SetFont(
             wx.Font(
@@ -53,6 +55,8 @@ class TitleBarControl(wx.Panel):
 
         # Zulu Time Display
         self.time_lbl = wx.StaticText(self, label=self._get_zulu_time())
+        self.time_lbl.SetBackgroundColour(wx.Colour(8, 15, 25))
+        #self.time_lbl.SetBackgroundColour(wx.Colour(255, 0, 0))
         self.time_lbl.SetForegroundColour(wx.Colour(255, 255, 255))
         self.time_lbl.SetFont(
             wx.Font(
@@ -78,12 +82,11 @@ class TitleBarControl(wx.Panel):
 
     def _on_paint(self, event):
         dc = wx.AutoBufferedPaintDC(self)
-        w, h = self.GetClientSize()
-
-        # Draw Background Color
-        bg_color = wx.Colour(8, 15, 25)
-        dc.SetBackground(wx.Brush(bg_color))
+        dc.SetBackground(wx.Brush(wx.Colour(8, 15, 25)))
+        #dc.SetBackground(wx.Brush(wx.Colour(255, 0, 0)))
         dc.Clear()
+
+        w, h = self.GetClientSize()
         
         # Bottom border
         dc.SetPen(wx.Pen(wx.Colour(43, 49, 61), 1))
