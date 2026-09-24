@@ -6,6 +6,7 @@ class SidebarControl(wx.Panel):
     def __init__(self, parent, on_tab_changed=None):
         super().__init__(parent, id=wx.ID_ANY, style=wx.NO_BORDER)
         self.SetBackgroundColour(wx.Colour(8, 15, 25))
+        #self.SetBackgroundColour(wx.Colour(0, 0, 255))
         self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
         self.SetDoubleBuffered(True)
         self.SetMinSize((200, -1))
@@ -51,7 +52,7 @@ class SidebarControl(wx.Panel):
     def _on_paint(self, event):
         dc = wx.AutoBufferedPaintDC(self)
         dc.SetBackground(wx.Brush(wx.Colour(8, 15, 25)))
-        #dc.SetBackground(wx.Brush(wx.Colour(255, 0, 0)))
+        #dc.SetBackground(wx.Brush(wx.Colour(0, 0, 255)))
         dc.Clear()
 
         # Right border line separating sidebar from content

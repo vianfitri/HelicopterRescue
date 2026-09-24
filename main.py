@@ -22,6 +22,7 @@ class MainFrame(wx.Frame):
         self.SetMinSize((1024, 600))
         #self.SetBackgroundColour(wx.Colour(18, 22, 28))
         self.SetBackgroundColour(wx.Colour(17, 19, 23))
+        #self.SetBackgroundColour(wx.Colour(0, 255, 0))
         #self.SetBackgroundColour(wx.Colour(8, 15, 25))
         self.Centre()
 
@@ -33,6 +34,8 @@ class MainFrame(wx.Frame):
 
         # Top Title Bar Control
         self.title_bar = TitleBarControl(self)
+        #self.title_bar = wx.Panel(self, size=(-1, 46))
+        #self.title_bar.SetBackgroundColour(wx.Colour(255, 0, 0))
         root_sizer.Add(self.title_bar, 0, wx.EXPAND)
 
         # Main Body: Horizontal split
