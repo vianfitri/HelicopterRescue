@@ -50,7 +50,8 @@ class SidebarControl(wx.Panel):
 
     def _on_paint(self, event):
         dc = wx.AutoBufferedPaintDC(self)
-        dc.SetBackground(wx.Brush(wx.Colour(255, 0, 0)))
+        dc.SetBackground(wx.Brush(wx.Colour(8, 15, 25)))
+        #dc.SetBackground(wx.Brush(wx.Colour(255, 0, 0)))
         dc.Clear()
 
         # Right border line separating sidebar from content
