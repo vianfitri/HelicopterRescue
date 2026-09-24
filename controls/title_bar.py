@@ -6,6 +6,7 @@ class TitleBarControl(wx.Panel):
         super().__init__(parent, id=wx.ID_ANY, size=(-1, 46), style=wx.NO_BORDER)
         #self.SetBackgroundColour(wx.Colour(23, 26, 32))
         self.SetBackgroundColour(wx.Colour(8, 15, 25))
+        #self.SetBackgroundColour(wx.Colour(255, 0, 0))
         self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
         self.SetDoubleBuffered(True)
         
