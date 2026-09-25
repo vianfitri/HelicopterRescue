@@ -83,9 +83,18 @@ class SidebarControl(wx.Panel):
         main_sizer.Add(header_panel, 0, wx.EXPAND | wx.RIGHT, border=1)
 
         # Tab Buttons
-        tab_definitions = []
+        tab_definitions = [
+            (0, "TRAINING", "flight"),
+            (1, "SETTINGS", "gear"),
+            (2, "LOGS", "list")
+        ]
 
         tabs_sizer = wx.BoxSizer(wx.VERTICAL)
+        for tab_id, label, icon_type in tab_definitions:
+            btn = TabButton(self, tab_id=tab_id, label=label, icon_type=icon_type)
+            btn.Bind(EVT_TAB_SELECTED, self._on_tab_click)
+            self.buttons.append(btn)
+            tabs_sizer.Add(btn, 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 8)
 
         self.SetSizer(main_sizer)
 
