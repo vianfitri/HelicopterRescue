@@ -31,6 +31,9 @@ class SidebarControl(wx.Panel):
         # Top Spacing
         header_sizer.AddSpacer(16)
 
+        # client Logo Canvas
+        client_logo_canvas = wx.Panel(header_panel, size=(), style=wx.NO_BORDER)
+
         # spacing
         header_sizer.AddSpacer(16)
 
