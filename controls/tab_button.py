@@ -9,7 +9,7 @@ TabSelectEvent, EVT_TAB_SELECTED = wx.lib.newevent.NewCommandEvent()
 
 class TabButton(wx.Control):
 
-    def __init__(self, parent, tab_id: int, label: str, subtitle: str, icon_type: str):
+    def __init__(self, parent, tab_id: int, label: str, icon_type: str):
         super().__init__(
             parent, 
             id=wx.ID_ANY, 
@@ -17,7 +17,6 @@ class TabButton(wx.Control):
         )
         self.tab_id = tab_id
         self.label = label
-        self.subtitle = subtitle
         self.icon_type = icon_type
         
         self.is_selected = False

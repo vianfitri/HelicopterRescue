@@ -1,5 +1,6 @@
 import wx
 
+from .tab_button import TabButton, EVT_TAB_SELECTED
 
 class SidebarControl(wx.Panel):
 
