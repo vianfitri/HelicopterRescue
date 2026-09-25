@@ -37,7 +37,7 @@ class TabButton(wx.Control):
 
     def DoGetBestSize(self):
         """Menentukan ukuran default kontrol jika tidak di-set oleh Sizer."""
-        return wx.Size(220, 60)
+        return wx.Size(200, 60)
 
     def set_selected(self, selected: bool):
         if self.is_selected != selected:
