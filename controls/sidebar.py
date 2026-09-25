@@ -96,6 +96,8 @@ class SidebarControl(wx.Panel):
             self.buttons.append(btn)
             tabs_sizer.Add(btn, 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 8)
 
+        main_sizer.Add(tabs_sizer, 0, wx.EXPAND)
+
         self.SetSizer(main_sizer)
 
         # Activate initial tab (0)
