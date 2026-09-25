@@ -16,9 +16,27 @@ class SidebarControl(wx.Panel):
         self.buttons = []
         self.active_tab_index = 0
 
+        # load and prepare bitmap logo
+        self.logo_bitmap = self._load_and_scale_logo("assets/images/PPS_logo.png", target_width = 128)
+
         self.Bind(wx.EVT_PAINT, self._on_paint)
 
         self._init_ui()
+
+    def _load_and_scale_logo(self, image_path, target_width = 128):
+        image = wx.Image(image_path, wx.BITMAP_TYPE_PNG)
+
+        if not image.IsOk():
+            return None
+
+        # calculate height proportional based target_width
+        orig_w, orig_h = image.GetWidth(), image.GetHeight()
+        aspect_ratio = orig_h / orig_w
+        target_height = int(target_width * aspect_ratio)
+
+        # rescaling image
+        scaled_image = image.Scale(target_width, target_height, wx.IMAGE_QUALITY_BOX_AVERAGE)
+        return scaled_image.ConvertToBitmap()
 
     def _init_ui(self):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
@@ -35,7 +53,27 @@ class SidebarControl(wx.Panel):
         client_logo_canvas = wx.Panel(header_panel, size=(150, 150), style=wx.NO_BORDER)
         client_logo_canvas.SetBackgroundColour(wx.Colour(8, 15, 25))
 
-        header_sizer.Add(client_logo_canvas, 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT, 16)
+        # inline paint Handler to draw logo
+        def _on_canvas_paint(event):
+            dc = wx.PaintDC(client_logo_canvas)
+            gc = wx.GraphicsContext.Create(dc)
+            if not gc:
+                return
+            
+            if self.logo_bitmap and self.logo_bitmap.IsOk():
+                cw, ch = client_logo_canvas.GetClientSize()
+                bw, bh = self.logo_bitmap.GetWidth(), self.logo_bitmap.GetHeight()
+
+                # calculate coordinat for center image
+                x = (cw - bw) // 2
+                y = (ch - bh) // 2
+
+                # draw bitmap
+                gc.DrawBitmap(self.logo_bitmap, x, y, bw, bh)
+
+        client_logo_canvas.Bind(wx.EVT_PAINT, _on_canvas_paint)
+
+        header_sizer.Add(client_logo_canvas, 0, wx.ALIGN_CENTER_HORIZONTAL)
 
         # spacing
         header_sizer.AddSpacer(16)
