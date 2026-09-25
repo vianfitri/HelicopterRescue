@@ -9,7 +9,7 @@ class SidebarControl(wx.Panel):
         #self.SetBackgroundColour(wx.Colour(0, 0, 255))
         self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
         self.SetDoubleBuffered(True)
-        self.SetMinSize((200, -1))
+        self.SetMinSize((210, -1))
         self.SetMaxSize((250, -1))
 
         self.on_tab_changed = on_tab_changed

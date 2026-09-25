@@ -26,7 +26,7 @@ class TabButton(wx.Control):
         # Konfigurasi rendering untuk custom control
         self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
         self.SetDoubleBuffered(True)
-        self.SetMinSize((220, 60))
+        self.SetMinSize((200, 60))
         self.SetCursor(wx.Cursor(wx.CURSOR_HAND))
         
         # Event bindings
