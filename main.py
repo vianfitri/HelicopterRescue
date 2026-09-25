@@ -29,11 +29,14 @@ class MainFrame(wx.Frame):
         self._init_ui()
 
     def _init_ui(self):
+        # root panel
+        root_panel = wx.Panel(self)
+
         # Vertical root sizer: Top Title Bar + Body
         root_sizer = wx.BoxSizer(wx.VERTICAL)
 
         # Top Title Bar Control
-        self.title_bar = TitleBarControl(self)
+        self.title_bar = TitleBarControl(root_panel)
         #self.title_bar = wx.Panel(self, size=(-1, 46))
         #self.title_bar.SetBackgroundColour(wx.Colour(255, 0, 0))
         root_sizer.Add(self.title_bar, 0, wx.EXPAND)
@@ -42,11 +45,11 @@ class MainFrame(wx.Frame):
         body_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # Right Content Area (Simplebook page swtcher)
-        self.content_book = wx.Simplebook(self, style=wx.NO_BORDER)
+        self.content_book = wx.Simplebook(root_panel, style=wx.NO_BORDER)
         self.content_book.SetBackgroundColour(wx.Colour(17, 19, 23))
 
         # Left sidebar
-        self.sidebar = SidebarControl(self, on_tab_changed=self._on_tab_changed)
+        self.sidebar = SidebarControl(root_panel, on_tab_changed=self._on_tab_changed)
         body_sizer.Add(self.sidebar, 0, wx.EXPAND)
 
         # ==== TAB PAGE ====
@@ -104,7 +107,7 @@ class MainFrame(wx.Frame):
         #body_sizer.Add(self.content_book, 1, wx.EXPAND)
 
         root_sizer.Add(body_sizer, 1, wx.EXPAND)
-        self.SetSizer(root_sizer)
+        root_panel.SetSizer(root_sizer)
         self.Layout()
 
     def _on_tab_changed(self, tab_index: int):
