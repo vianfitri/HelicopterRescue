@@ -37,8 +37,6 @@ class MainFrame(wx.Frame):
 
         # Top Title Bar Control
         self.title_bar = TitleBarControl(root_panel)
-        #self.title_bar = wx.Panel(self, size=(-1, 46))
-        #self.title_bar.SetBackgroundColour(wx.Colour(255, 0, 0))
         root_sizer.Add(self.title_bar, 0, wx.EXPAND)
 
         # Main Body: Horizontal split
