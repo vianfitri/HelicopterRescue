@@ -18,13 +18,13 @@ class SidebarControl(wx.Panel):
         self.active_tab_index = 0
 
         # load and prepare bitmap logo
-        self.logo_bitmap = self._load_and_scale_logo("assets/images/PPS_logo.png", target_width = 115)
+        self.logo_bitmap = self._load_and_scale_logo("assets/images/PPS_logo.png", target_width = 100)
 
         self.Bind(wx.EVT_PAINT, self._on_paint)
 
         self._init_ui()
 
-    def _load_and_scale_logo(self, image_path, target_width = 115):
+    def _load_and_scale_logo(self, image_path, target_width = 100):
         image = wx.Image(image_path, wx.BITMAP_TYPE_PNG)
 
         if not image.IsOk():
