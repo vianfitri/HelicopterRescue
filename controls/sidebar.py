@@ -79,7 +79,7 @@ class SidebarControl(wx.Panel):
         header_sizer.AddSpacer(16)
 
         header_panel.SetSizer(header_sizer)
-        main_sizer.Add(header_panel, 0, wx.EXPAND)
+        main_sizer.Add(header_panel, 0, wx.EXPAND | wx.RIGHT, border=1)
 
         # Tab Buttons
         tab_definitions = []
