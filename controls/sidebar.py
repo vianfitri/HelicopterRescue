@@ -35,7 +35,7 @@ class SidebarControl(wx.Panel):
         client_logo_canvas = wx.Panel(header_panel, size=(150, 150), style=wx.NO_BORDER)
         client_logo_canvas.SetBackgroundColour(wx.Colour(8, 15, 25))
 
-        header_sizer.Add(client_logo_canvas, 0, wx.ALL | wx.LEFT, 16)
+        header_sizer.Add(client_logo_canvas, 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT, 16)
 
         # spacing
         header_sizer.AddSpacer(16)
