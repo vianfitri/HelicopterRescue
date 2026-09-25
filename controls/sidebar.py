@@ -24,6 +24,15 @@ class SidebarControl(wx.Panel):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         # Header Logo and Title Area
+        header_panel = wx.Panel(self, style=wx.NO_BORDER)
+        header_panel.SetBackgroundColour(wx.Colour(8, 15, 25))
+        header_sizer = wx.BoxSizer(wx.VERTICAL)
+
+        # Top Spacing
+        header_sizer.AddSpacer(16)
+
+        # spacing
+        header_sizer.AddSpacer(16)
 
         # Tab Buttons
         tab_definitions = []
