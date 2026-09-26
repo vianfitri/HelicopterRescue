@@ -71,8 +71,8 @@ class TabButton(wx.Control):
         # 1. Background color determination
         if self.is_selected:
             # Gradient Background Active Tab
-            grad_start = wx.Colour(112, 56, 11, 100)
-            grad_end = wx.Colour(22, 30, 41, 100)
+            grad_start = wx.Colour(112, 56, 11, 170)
+            grad_end = wx.Colour(22, 30, 41, 170)
             brush = gc.CreateLinearGradientBrush(
                 0, 0, w, 0,
                 grad_start, grad_end
