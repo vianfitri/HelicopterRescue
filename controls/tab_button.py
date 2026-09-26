@@ -117,6 +117,8 @@ class TabButton(wx.Control):
             arrow_path.AddLineToPoint(arrow_x - 3, arrow_y + 4)
             gc.StrokePath(arrow_path)
 
+        # 3. Button Icon
+
         #if self.is_selected:
         #    gc.SetPen(wx.NullPen)
         #    #gc.SetBrush(wx.Brush(Theme.ACCENT_ORANGE))
@@ -208,15 +210,4 @@ class TabButton(wx.Control):
         #gc.SetFont(sub_font, sub_color)
         #gc.DrawText(self.subtitle, text_x, h / 2.0 + 3)
 
-        # 5. Selected Right Arrow Indicator (Subtle Chevron)
-        #if self.is_selected:
-        #    #gc.SetPen(wx.Pen(Theme.ACCENT_ORANGE, 2))
-        #    gc.SetPen(wx.Pen(wx.Colour(255, 94, 19), 2))
-        #    arrow_x = w - 18
-        #    arrow_y = h / 2.0
-        #    arrow_path = gc.CreatePath()
-        #    arrow_path.MoveToPoint(arrow_x - 3, arrow_y - 4)
-        #    arrow_path.AddLineToPoint(arrow_x + 1, arrow_y)
-        #    arrow_path.AddLineToPoint(arrow_x - 3, arrow_y + 4)
-        #    gc.StrokePath(arrow_path)
 
