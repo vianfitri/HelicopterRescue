@@ -149,6 +149,8 @@ class TabButton(wx.Control):
 
         gc.DrawBitmap(bmp, icon_x, icon_y, icon_w, icon_h)
 
+        # 4. Button Title
+
         # 4. Text Labels (Title & Subtitle)
         #text_x = 58.0
         
