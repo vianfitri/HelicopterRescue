@@ -149,50 +149,6 @@ class TabButton(wx.Control):
 
         gc.DrawBitmap(bmp, icon_x, icon_y, icon_w, icon_h)
 
-
-        #if self.is_selected:
-        #    gc.SetPen(wx.NullPen)
-        #    #gc.SetBrush(wx.Brush(Theme.ACCENT_ORANGE))
-        #    gc.SetBrush(wx.Brush(wx.Colour(255, 94, 19)))
-        #    gc.DrawRoundedRectangle(6, 8, 4, h - 16, 2)
-        #elif self.is_hovered:
-        #    # Subtle accent indicator on hover
-        #    gc.SetPen(wx.NullPen)
-        #    gc.SetBrush(wx.Brush(wx.Colour(
-        #        #Theme.ACCENT_ORANGE.Red(),
-        #        #Theme.ACCENT_ORANGE.Green(),
-        #        #Theme.ACCENT_ORANGE.Blue(), 120
-        #        255,
-        #        94,
-        #        19,
-        #        120
-        #    )))
-        #    gc.DrawRoundedRectangle(6, 12, 3, h - 24, 1.5)
-
-        # 3. Draw Vector Icon
-        #icon_size = 24.0
-        #icon_x = 22.0
-        #icon_y = (h - icon_size) / 2.0
-
-        #if self.is_selected:
-        #    #icon_color = Theme.ACCENT_ORANGE
-        #    icon_color = wx.Colour(255, 94, 19)
-        #elif self.is_hovered:
-        #    #icon_color = Theme.TEXT_PRIMARY
-        #    icon_color = wx.Colour(255, 255, 255)
-        #else:
-        #    #icon_color = Theme.TEXT_MUTED
-        #    icon_color = wx.Colour(129, 142, 155)
-
-        #if self.icon_type == 'flight':
-        #    IconRenderer.draw_flight_ops(gc, icon_x, icon_y, icon_size, icon_color)
-        #elif self.icon_type == 'missions':
-        #    IconRenderer.draw_missions(gc, icon_x, icon_y, icon_size, icon_color)
-        #elif self.icon_type == 'fleet':
-        #    IconRenderer.draw_fleet(gc, icon_x, icon_y, icon_size, icon_color)
-        #elif self.icon_type == 'weather':
-        #    IconRenderer.draw_weather(gc, icon_x, icon_y, icon_size, icon_color)
-
         # 4. Text Labels (Title & Subtitle)
         #text_x = 58.0
         
