@@ -1,6 +1,9 @@
 import math
 import wx
 import wx.lib.newevent
+from utils.svg_utils import load_svg_as_bitmap
+from pathlib import Path
+
 #from Assets.theme import Theme
 #from Assets.icons import IconRenderer
 
@@ -28,7 +31,14 @@ class TabButton(wx.Control):
         self.SetDoubleBuffered(True)
         self.SetMinSize((200, 60))
         self.SetCursor(wx.Cursor(wx.CURSOR_HAND))
-        
+
+        # load icon bitmap
+        icon_base_dir = Path("assets/icons")
+        icon_path = icon_base_dir / self.icon_type
+
+        print(icon_path)
+        #bitmap_norm = load_svg_as_bitmap("assets/icons/")
+
         # Event bindings
         self.Bind(wx.EVT_PAINT, self._on_paint)
         self.Bind(wx.EVT_ENTER_WINDOW, self._on_enter)
@@ -118,6 +128,7 @@ class TabButton(wx.Control):
             gc.StrokePath(arrow_path)
 
         # 3. Button Icon
+
 
         #if self.is_selected:
         #    gc.SetPen(wx.NullPen)
