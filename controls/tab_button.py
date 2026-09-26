@@ -32,12 +32,20 @@ class TabButton(wx.Control):
         self.SetMinSize((200, 60))
         self.SetCursor(wx.Cursor(wx.CURSOR_HAND))
 
+        # Color State Text and Icon
+        HEX_NORMAL = "#BFC1C1"
+        HEX_HOVER = "#D2D7E1"
+        HEX_ACTIVE = "#FFFFFF"
+
         # load icon bitmap
         icon_base_dir = Path("assets/icons")
         icon_path = icon_base_dir / self.icon_type
 
-        print(icon_path)
-        #bitmap_norm = load_svg_as_bitmap("assets/icons/")
+        #print(icon_path)
+        self.icon_size = (20,20)
+        self.bitmap_norm = load_svg_as_bitmap(icon_path, HEX_NORMAL, size=self.icon_size, is_file=True)
+        self.bitmap_hover = load_svg_as_bitmap(icon_path, HEX_HOVER, size=self.icon_size, is_file=True)
+        self.bitmap_active = load_svg_as_bitmap(icon_path, HEX_ACTIVE, size=self.icon_size, is_file=True)
 
         # Event bindings
         self.Bind(wx.EVT_PAINT, self._on_paint)
@@ -128,6 +136,18 @@ class TabButton(wx.Control):
             gc.StrokePath(arrow_path)
 
         # 3. Button Icon
+        if self.is_selected:
+            bmp = self.bitmap_active
+        elif self.is_hovered:
+            bmp = self.bitmap_hover
+        else:
+            bmp = self.bitmap_norm
+
+        icon_w, icon_h = self.icon_size    
+        icon_x = 22.0
+        icon_y = (h - icon_h) / 2.0
+
+        gc.DrawBitmap(bmp, icon_x, icon_y, icon_w, icon_h)
 
 
         #if self.is_selected:

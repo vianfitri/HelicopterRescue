@@ -85,8 +85,8 @@ class SidebarControl(wx.Panel):
         # Tab Buttons
         tab_definitions = [
             (0, "TRAINING", "helicopter.svg"),
-            (1, "SETTINGS", "gear.svg"),
-            (2, "LOGS", "list.svg")
+            (1, "SETTINGS", "gear-icon.svg"),
+            (2, "LOGS", "clipboard-clock.svg")
         ]
 
         tabs_sizer = wx.BoxSizer(wx.VERTICAL)
