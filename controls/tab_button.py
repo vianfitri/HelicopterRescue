@@ -1,3 +1,4 @@
+import math
 import wx
 import wx.lib.newevent
 #from Assets.theme import Theme
@@ -74,7 +75,7 @@ class TabButton(wx.Control):
             grad_start = wx.Colour(112, 56, 11, 170)
             grad_end = wx.Colour(22, 30, 41, 170)
             brush = gc.CreateLinearGradientBrush(
-                0, 0, w, 0,
+                4, 2, w - 8, 2,
                 grad_start, grad_end
             )
 
@@ -92,7 +93,30 @@ class TabButton(wx.Control):
         gc.SetPen(wx.NullPen)
         gc.DrawRoundedRectangle(4, 2, w - 8, h - 4, 6)
 
-        # 2. Left Active Indicator (Safety Orange Bar)
+        # 2. Left Active Indicator (Safety Orange Bar) and Right Arrow Active Indicator
+        if self.is_selected:
+            # create path left bar active indicator
+            path = gc.CreatePath()
+            path.MoveToPoint(10, 2)
+            path.AddArc(10, 8, 6, 1.5 * math.pi, math.pi, False)
+            path.AddLineToPoint(4, h - 16)
+            path.AddArc(10, h - 8, 6, math.pi, .5 * math.pi, False)
+            path.CloseSubpath()
+
+            # draw fill path
+            gc.SetBrush(gc.CreateBrush(wx.Brush(wx.Colour(255, 94, 19))))
+            gc.FillPath(path)
+
+            # active right arrow indicator
+            gc.SetPen(wx.Pen(wx.Colour(255, 94, 19), 2))
+            arrow_x = w - 18
+            arrow_y = h / 2.0
+            arrow_path = gc.CreatePath()
+            arrow_path.MoveToPoint(arrow_x - 3, arrow_y - 4)
+            arrow_path.AddLineToPoint(arrow_x + 1, arrow_y)
+            arrow_path.AddLineToPoint(arrow_x - 3, arrow_y + 4)
+            gc.StrokePath(arrow_path)
+
         #if self.is_selected:
         #    gc.SetPen(wx.NullPen)
         #    #gc.SetBrush(wx.Brush(Theme.ACCENT_ORANGE))
