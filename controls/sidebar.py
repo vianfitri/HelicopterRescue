@@ -45,13 +45,13 @@ class CardStatus(wx.Control):
         # -------------------------------------------------------------
         # 2. SETUP FONT & WARNA TEKS
         # -------------------------------------------------------------
-        padding_x = 18
-        padding_y = 16
+        padding_x = 16
+        padding_y = 14
 
         # Font untuk Judul Baris 1
-        title_font = wx.Font(9, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+        title_font = wx.Font(8, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
         # Font untuk Detail Baris 2
-        content_font = wx.Font(8, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+        content_font = wx.Font(7, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
 
         # Warna Teks
         white_color = wx.Colour(255, 255, 255)
@@ -69,7 +69,7 @@ class CardStatus(wx.Control):
         row2_y = padding_y + 32
         
         gc.SetFont(content_font, white_color)
-        gc.DrawText("HELICOPTER DATA", padding_x, row2_y)
+        gc.DrawText("HELICOPTER", padding_x, row2_y)
 
         # -------------------------------------------------------------
         # 5. DRAW BARIS 2 (KANAN): "CONNECTED" (Rata Kanan, Warna Hijau)
