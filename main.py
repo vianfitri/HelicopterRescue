@@ -1,13 +1,7 @@
 import wx
 
-from controls.sidebar_tabcontrol import SidebarTabControl
 from controls.sidebar import SidebarControl
 from controls.title_bar import TitleBarControl
-from utils.svg_utils import load_svg_as_bitmap
-
-SVG_TRAINING = "assets/icons/helicopter.svg"
-SVG_HISTORY = "assets/icons/clipboard-clock.svg"
-SVG_SESSION = "assets/icons/gear-icon.svg"
 
 class MainFrame(wx.Frame):
     def __init__(self):
@@ -46,60 +40,6 @@ class MainFrame(wx.Frame):
         # Left sidebar
         self.sidebar = SidebarControl(root_panel, on_tab_changed=self._on_tab_changed)
         body_sizer.Add(self.sidebar, 0, wx.EXPAND)
-
-        # ==== TAB PAGE ====
-        # Main Layout
-        #main_sizer = wx.BoxSizer(wx.HORIZONTAL)
-
-        # Sidebar Control
-        #self.sidebar = SidebarTabControl(self, size=(200, -1))
-
-        # Color Scheme for icon
-        #HEX_NORMAL = "#A0A5AF"
-        HEX_NORMAL = "#BFC1C1"
-        HEX_HOVER = "#D2D7E1"
-        #HEX_HOVER = "#BFC1C1"
-        HEX_ACTIVE = "#FFFFFF"
-
-        # Load svg tab
-        bmp_tr_norm = load_svg_as_bitmap(SVG_TRAINING, HEX_NORMAL, size=(20, 20), is_file=True)
-        bmp_tr_hover = load_svg_as_bitmap(SVG_TRAINING, HEX_HOVER, size=(20, 20), is_file=True)
-        bmp_tr_active = load_svg_as_bitmap(SVG_TRAINING, HEX_ACTIVE, size=(20, 20), is_file=True)
-
-        bmp_hs_norm = load_svg_as_bitmap(SVG_HISTORY, HEX_NORMAL, size=(20, 20), is_file=True)
-        bmp_hs_hover = load_svg_as_bitmap(SVG_HISTORY, HEX_HOVER, size=(20, 20), is_file=True)
-        bmp_hs_active = load_svg_as_bitmap(SVG_HISTORY, HEX_ACTIVE, size=(20, 20), is_file=True)
-
-        bmp_ss_norm = load_svg_as_bitmap(SVG_SESSION, HEX_NORMAL, size=(20, 20), is_file=True)
-        bmp_ss_hover = load_svg_as_bitmap(SVG_SESSION, HEX_HOVER, size=(20, 20), is_file=True)
-        bmp_ss_active = load_svg_as_bitmap(SVG_SESSION, HEX_ACTIVE, size=(20, 20), is_file=True)
-        
-        # Add Tab
-        #self.sidebar.AddTab("Training", bmp_tr_norm, bmp_tr_hover, bmp_tr_active)
-        #self.sidebar.AddTab("History", bmp_hs_norm, bmp_hs_hover, bmp_hs_active)
-        #self.sidebar.AddTab("Session", bmp_ss_norm, bmp_ss_hover, bmp_ss_active)
-
-        # Tab Change Event
-        #self.sidebar.Bind(wx.EVT_BUTTON, self.OnTabChanged)
-
-        # Content Panel
-        #self.content_panel = wx.Panel(self)
-        #self.content_panel.SetBackgroundColour(wx.Colour(28, 33, 40))
-
-        #self.label_title = wx.StaticText(self.content_panel, label="SESSION DETAIL #014", pos=(20, 20))
-        #font = wx.Font(14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
-        #self.label_title.SetFont(font)
-        #self.label_title.SetForegroundColour(wx.Colour(255, 255, 255))
-
-        # Layout
-        #main_sizer.Add(self.sidebar, 0, wx.EXPAND | wx.ALL, 0)
-        #main_sizer.Add(self.content_panel, 1, wx.EXPAND | wx.ALL, 5)
-
-        #self.SetSizer(main_sizer)
-        
-        # ==== === ==== ====
-
-        #body_sizer.Add(self.content_book, 1, wx.EXPAND)
 
         root_sizer.Add(body_sizer, 1, wx.EXPAND)
         root_panel.SetSizer(root_sizer)
