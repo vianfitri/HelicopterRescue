@@ -167,6 +167,12 @@ class TabButton(wx.Control):
         else:
             title_color = wx.Colour(self.HEX_NORMAL)
 
+        gc.SetFont(title_font, title_color)
+        _, txt_h = gc.GetTextExtent(self.label)
+        title_x = icon_x + bmp.GetWidth() + 12
+        title_y = (h - txt_h)/ 2.0
+        gc.DrawText(self.label, title_x, title_y)
+
         # 4. Text Labels (Title & Subtitle)
         #text_x = 58.0
         
