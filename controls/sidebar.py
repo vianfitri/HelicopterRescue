@@ -98,6 +98,8 @@ class SidebarControl(wx.Panel):
 
         main_sizer.Add(tabs_sizer, 0, wx.EXPAND)
 
+        main_sizer.AddStretchSpacer(1)
+
         self.SetSizer(main_sizer)
 
         # Activate initial tab (0)
