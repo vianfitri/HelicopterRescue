@@ -3,6 +3,7 @@ import wx
 from controls.sidebar import SidebarControl
 from controls.title_bar import TitleBarControl
 from views.training_view import TrainingView
+from views.settings_view import SettingsView
 
 class MainFrame(wx.Frame):
     def __init__(self):
@@ -45,6 +46,10 @@ class MainFrame(wx.Frame):
         # Tab 0, Training View
         self.view_training = TrainingView(self.content_book)
         self.content_book.AddPage(self.view_training, "TRAINING")
+
+        # Tab 1, Settings View
+        self.view_settings = SettingsView(self.content_book)
+        self.content_book.AddPage(self.view_settings, "SETTINGS")
 
         body_sizer.Add(self.content_book, 1, wx.EXPAND)
 

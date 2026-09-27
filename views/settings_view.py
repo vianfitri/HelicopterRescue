@@ -1,6 +1,6 @@
 import wx
 
-class TrainingView(wx.Panel):
+class SettingsView(wx.Panel):
 
     def __init__(self, parent):
         super().__init__(parent, style=wx.NO_BORDER)
@@ -27,7 +27,7 @@ class TrainingView(wx.Panel):
         bullet_lbl.SetForegroundColour(wx.Colour(255, 94, 19))
         bullet_lbl.SetFont(lbl_font)
         lbl_W, _ = bullet_lbl.GetTextExtent(" ")
-        title_lbl = wx.StaticText(self, label="TRAINING VIEW")
+        title_lbl = wx.StaticText(self, label="SETTINGS")
         title_lbl.SetForegroundColour(wx.Colour(255, 255, 255))
         title_lbl.SetFont(lbl_font)
 
