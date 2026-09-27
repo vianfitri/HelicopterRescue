@@ -23,7 +23,7 @@ class CardStatus(wx.Control):
 
     def on_paint(self, event):
         dc = wx.AutoBufferedPaintDC(self)
-        dc.Clear() # Bersihkan canvas dengan latar belakang parent
+        #dc.Clear() # Bersihkan canvas dengan latar belakang parent
 
         gc = wx.GraphicsContext.Create(dc)
         if not gc:
