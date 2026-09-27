@@ -38,7 +38,7 @@ class LongitudinalCard(wx.Panel):
         val_lbl.SetForegroundColour(wx.Colour(255, 94, 19))
         val_lbl.SetFont(
             wx.Font(
-                18,
+                22,
                 wx.FONTFAMILY_DEFAULT,
                 wx.FONTSTYLE_NORMAL,
                 wx.FONTWEIGHT_BOLD,
@@ -48,7 +48,7 @@ class LongitudinalCard(wx.Panel):
         )
         sizer.Add(val_lbl, 0, wx.LEFT | wx.RIGHT, 14)
         sizer.AddSpacer(12)
-        
+
         self.SetSizer(sizer)
 
     def _on_paint(self, event):
@@ -61,7 +61,7 @@ class LongitudinalCard(wx.Panel):
         # Border
         gc.SetPen(wx.Pen(wx.Colour(43, 49, 61), 1))
         gc.SetBrush(wx.Brush(wx.Colour(17, 19, 23)))
-        gc.DrawRoundedRectangle(0, 0, w - 1, h, 6)
+        gc.DrawRoundedRectangle(0, 0, w - 1, h - 1, 6)
     
 class TrainingView(wx.Panel):
 
