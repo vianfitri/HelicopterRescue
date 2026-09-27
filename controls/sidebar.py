@@ -23,7 +23,9 @@ class CardStatus(wx.Control):
 
     def on_paint(self, event):
         dc = wx.AutoBufferedPaintDC(self)
-        #dc.Clear() # Bersihkan canvas dengan latar belakang parent
+        bg_color = self.GetParent().GetBackgroundColour()
+        dc.SetBackground(wx.Brush(bg_color))
+        dc.Clear()
 
         gc = wx.GraphicsContext.Create(dc)
         if not gc:
@@ -87,7 +89,7 @@ class SidebarControl(wx.Panel):
         super().__init__(parent, id=wx.ID_ANY, style=wx.NO_BORDER)
         self.SetBackgroundColour(wx.Colour(8, 15, 25))
         #self.SetBackgroundColour(wx.Colour(0, 0, 255))
-        self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
+        #self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
         self.SetDoubleBuffered(True)
         self.SetMinSize((210, -1))
         self.SetMaxSize((250, -1))
@@ -195,16 +197,22 @@ class SidebarControl(wx.Panel):
         self.active_tab_index = index
         for idx, btn in enumerate(self.buttons):
             btn.set_selected(idx == index)
+
+        self.Refresh()
+        
         if self.on_tab_changed:
             self.on_tab_changed(index)
 
     def _on_paint(self, event):
-        dc = wx.AutoBufferedPaintDC(self)
-        dc.SetBackground(wx.Brush(wx.Colour(8, 15, 25)))
+        #dc = wx.AutoBufferedPaintDC(self)
+        #dc.SetBackground(wx.Brush(wx.Colour(8, 15, 25)))
         #dc.SetBackground(wx.Brush(wx.Colour(0, 0, 255)))
-        dc.Clear()
+        #dc.Clear()
+        dc = wx.PaintDC(self)
 
         # Right border line separating sidebar from content
         w, h = self.GetClientSize()
         dc.SetPen(wx.Pen(wx.Colour(43, 49, 61), 1))
         dc.DrawLine(w - 1, 0, w - 1, h)
+
+        event.Skip()

@@ -81,6 +81,10 @@ class TabButton(wx.Control):
 
     def _on_paint(self, event):
         dc = wx.AutoBufferedPaintDC(self)
+        parent_bg = self.GetParent().GetBackgroundColour()
+        dc.SetBackground(wx.Brush(parent_bg))
+        dc.Clear()
+        
         gc = wx.GraphicsContext.Create(dc)
         if not gc:
             return
