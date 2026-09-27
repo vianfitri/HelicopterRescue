@@ -33,9 +33,9 @@ class TabButton(wx.Control):
         self.SetCursor(wx.Cursor(wx.CURSOR_HAND))
 
         # Color State Text and Icon
-        HEX_NORMAL = "#BFC1C1"
-        HEX_HOVER = "#D2D7E1"
-        HEX_ACTIVE = "#FFFFFF"
+        self.HEX_NORMAL = "#BFC1C1"
+        self.HEX_HOVER = "#D2D7E1"
+        self.HEX_ACTIVE = "#FFFFFF"
 
         # load icon bitmap
         icon_base_dir = Path("assets/icons")
@@ -43,9 +43,9 @@ class TabButton(wx.Control):
 
         #print(icon_path)
         self.icon_size = (20,20)
-        self.bitmap_norm = load_svg_as_bitmap(icon_path, HEX_NORMAL, size=self.icon_size, is_file=True)
-        self.bitmap_hover = load_svg_as_bitmap(icon_path, HEX_HOVER, size=self.icon_size, is_file=True)
-        self.bitmap_active = load_svg_as_bitmap(icon_path, HEX_ACTIVE, size=self.icon_size, is_file=True)
+        self.bitmap_norm = load_svg_as_bitmap(icon_path, self.HEX_NORMAL, size=self.icon_size, is_file=True)
+        self.bitmap_hover = load_svg_as_bitmap(icon_path, self.HEX_HOVER, size=self.icon_size, is_file=True)
+        self.bitmap_active = load_svg_as_bitmap(icon_path, self.HEX_ACTIVE, size=self.icon_size, is_file=True)
 
         # Event bindings
         self.Bind(wx.EVT_PAINT, self._on_paint)
@@ -150,6 +150,22 @@ class TabButton(wx.Control):
         gc.DrawBitmap(bmp, icon_x, icon_y, icon_w, icon_h)
 
         # 4. Button Title
+        title_font = wx.Font(
+            10,
+            wx.FONTFAMILY_SWISS,
+            wx.FONTSTYLE_NORMAL,
+            wx.FONTWEIGHT_BOLD,
+            False,
+            "Segoe UI"
+        )
+
+        # title color
+        if self.is_selected:
+            title_color = wx.Colour(self.HEX_ACTIVE)
+        elif self.is_hovered:
+            title_color = wx.Colour(self.HEX_HOVER)
+        else:
+            title_color = wx.Colour(self.HEX_NORMAL)
 
         # 4. Text Labels (Title & Subtitle)
         #text_x = 58.0

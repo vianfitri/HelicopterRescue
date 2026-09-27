@@ -28,7 +28,7 @@ class SidebarTabControl(wx.Control):
         self.color_hover_bg = wx.Colour(35,42, 52)         # Highlight Background on hover
         self.color_text_normal = wx.Colour(191, 193, 193)  # Text & Icon normal
         self.color_text_active = wx.Colour(255, 255, 255)  # Active text
-        self.color_text_hover = wx.Colour(210, 215, 226)   # Hover Text
+        self.color_text_hover = wx.Colour(210, 215, 225)   # Hover Text
         self.color_orange = wx.Colour(235, 130, 20)        # Line color & orange accent
 
         # Gradient colour active Tab
