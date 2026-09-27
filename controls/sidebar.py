@@ -3,24 +3,23 @@ import wx
 from .tab_button import TabButton, EVT_TAB_SELECTED
 
 class CardStatus(wx.Control):
-    def __init__(self, parent, id=wx.ID_ANY, pos=wx.DefaultPosition, size=(320, 100), 
-                 radius=15, bg_color=wx.Colour(30, 35, 45), border_color=wx.Colour(60, 65, 75)):
-        super().__init__(parent, id, pos, size, style=wx.NO_BORDER | wx.FULL_REPAINT_ON_RESIZE)
-        
-        self.radius = radius
-        self.card_bg_color = bg_color
-        self.border_color = border_color
+    def __init__(self, parent):
+        super().__init__(
+            parent, 
+            id=wx.ID_ANY, 
+            style=wx.NO_BORDER | wx.FULL_REPAINT_ON_RESIZE
+        )
 
-        # Mengaktifkan transparansi latar belakang terhadap parent
-        self.SetBackgroundStyle(wx.BG_STYLE_PARENT)
+        self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
+        self.SetDoubleBuffered(True)
+        self.SetMinSize((200, 100))
 
         # Event Bindings untuk menggambar kustom
         self.Bind(wx.EVT_PAINT, self.on_paint)
-        self.Bind(wx.EVT_ERASE_BACKGROUND, lambda e: None)
 
     def DoGetBestSize(self):
         """Menentukan ukuran default ideal untuk control ini."""
-        return wx.Size(320, 100)
+        return wx.Size(200, 100)
 
     def on_paint(self, event):
         dc = wx.AutoBufferedPaintDC(self)
@@ -87,7 +86,7 @@ class CardStatus(wx.Control):
         status_x = w - padding_x - status_w
 
         gc.DrawText(status_text, status_x, row2_y)
-        
+
 class SidebarControl(wx.Panel):
 
     def __init__(self, parent, on_tab_changed=None):
