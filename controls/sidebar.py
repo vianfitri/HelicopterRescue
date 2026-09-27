@@ -2,6 +2,92 @@ import wx
 
 from .tab_button import TabButton, EVT_TAB_SELECTED
 
+class CardStatus(wx.Control):
+    def __init__(self, parent, id=wx.ID_ANY, pos=wx.DefaultPosition, size=(320, 100), 
+                 radius=15, bg_color=wx.Colour(30, 35, 45), border_color=wx.Colour(60, 65, 75)):
+        super().__init__(parent, id, pos, size, style=wx.NO_BORDER | wx.FULL_REPAINT_ON_RESIZE)
+        
+        self.radius = radius
+        self.card_bg_color = bg_color
+        self.border_color = border_color
+
+        # Mengaktifkan transparansi latar belakang terhadap parent
+        self.SetBackgroundStyle(wx.BG_STYLE_PARENT)
+
+        # Event Bindings untuk menggambar kustom
+        self.Bind(wx.EVT_PAINT, self.on_paint)
+        self.Bind(wx.EVT_ERASE_BACKGROUND, lambda e: None)
+
+    def DoGetBestSize(self):
+        """Menentukan ukuran default ideal untuk control ini."""
+        return wx.Size(320, 100)
+
+    def on_paint(self, event):
+        dc = wx.AutoBufferedPaintDC(self)
+        dc.Clear() # Bersihkan canvas dengan latar belakang parent
+
+        gc = wx.GraphicsContext.Create(dc)
+        if not gc:
+            return
+
+        w, h = self.GetClientSize()
+        if w <= 0 or h <= 0:
+            return
+
+        # -------------------------------------------------------------
+        # 1. GAMBAR BACKGROUND ROUNDED RECTANGLE & BORDER
+        # -------------------------------------------------------------
+        gc.SetBrush(gc.CreateBrush(wx.Brush(self.card_bg_color)))
+        
+        if self.border_color:
+            gc.SetPen(gc.CreatePen(wx.GraphicsPenInfo(self.border_color).Width(1)))
+        else:
+            gc.SetPen(wx.NullPen)
+
+        # DrawRoundedRectangle(x, y, width, height, radius)
+        gc.DrawRoundedRectangle(0.5, 0.5, w - 1, h - 1, self.radius)
+
+        # -------------------------------------------------------------
+        # 2. SETUP FONT & WARNA TEKS
+        # -------------------------------------------------------------
+        padding_x = 18
+        padding_y = 16
+
+        # Font untuk Judul Baris 1
+        title_font = wx.Font(9, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+        # Font untuk Detail Baris 2
+        content_font = wx.Font(11, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+
+        # Warna Teks
+        white_color = wx.Colour(255, 255, 255)
+        green_color = wx.Colour(46, 204, 113) # Warna Hijau (Connected)
+
+        # -------------------------------------------------------------
+        # 3. DRAW BARIS 1: "DATA CONNECTION" (Rata Kiri, Warna Putih)
+        # -------------------------------------------------------------
+        gc.SetFont(title_font, white_color)
+        gc.DrawText("DATA CONNECTION", padding_x, padding_y)
+
+        # -------------------------------------------------------------
+        # 4. DRAW BARIS 2 (KIRI): "HELICOPTER DATA" (Rata Kiri, Warna Putih)
+        # -------------------------------------------------------------
+        row2_y = padding_y + 32
+        
+        gc.SetFont(content_font, white_color)
+        gc.DrawText("HELICOPTER DATA", padding_x, row2_y)
+
+        # -------------------------------------------------------------
+        # 5. DRAW BARIS 2 (KANAN): "CONNECTED" (Rata Kanan, Warna Hijau)
+        # -------------------------------------------------------------
+        status_text = "CONNECTED"
+        gc.SetFont(content_font, green_color)
+        
+        # Hitung lebar teks "CONNECTED" untuk kalkulasi posisi rata kanan
+        status_w, _ = gc.GetTextExtent(status_text)
+        status_x = w - padding_x - status_w
+
+        gc.DrawText(status_text, status_x, row2_y)
+        
 class SidebarControl(wx.Panel):
 
     def __init__(self, parent, on_tab_changed=None):
