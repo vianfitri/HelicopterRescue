@@ -1,5 +1,24 @@
 import wx
 
+class LongitudinalCard(wx.Panel):
+
+    def __init__(self, parent):
+        super().__init__(
+            parent,
+            style=wx.NO_BORDER
+        )
+        self.SetBackgroundColour(wx.Colour(17, 19, 23))
+        self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
+        self.SetDoubleBuffered(True)
+
+        self.Bind(wx.EVT_PAINT, self._on_paint)
+
+        sizer = wx.BoxSizer(wx.VERTICAL)
+        sizer.AddSpacer(12)
+
+    def _on_paint(self, event):
+        pass
+    
 class TrainingView(wx.Panel):
 
     def __init__(self, parent):
@@ -37,5 +56,15 @@ class TrainingView(wx.Panel):
 
         main_sizer.Add(header_sizer, 0, wx.EXPAND)
         main_sizer.AddSpacer(16)
+
+        # Content
+        content_sizer = wx.BoxSizer(wx.HORIZONTAL)
+
+        left_content_sizer = wx.BoxSizer(wx.VERTICAL)
+
+        content_sizer.Add(left_content_sizer, 0, wx.LEFT, 24)
+
+
+        
 
         self.SetSizer(main_sizer)
