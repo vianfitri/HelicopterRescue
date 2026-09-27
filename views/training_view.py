@@ -10,14 +10,58 @@ class LongitudinalCard(wx.Panel):
         self.SetBackgroundColour(wx.Colour(17, 19, 23))
         self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
         self.SetDoubleBuffered(True)
+        self.SetMinSize((164, -1))
 
         self.Bind(wx.EVT_PAINT, self._on_paint)
 
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.AddSpacer(12)
 
+        # title label
+        title_lbl = wx.StaticText(self, label="LONGITUDINAL POSITION")
+        title_lbl.SetForegroundColour(wx.Colour(255, 255, 255))
+        title_lbl.SetFont(
+            wx.Font(
+                8,
+                wx.FONTFAMILY_DEFAULT,
+                wx.FONTSTYLE_NORMAL,
+                wx.FONTWEIGHT_BOLD,
+                False,
+                "Segoe UI"
+            )
+        )
+        sizer.Add(title_lbl, 0, wx.LEFT | wx.RIGHT, 14)
+        sizer.AddSpacer(14)
+
+        # value label and unit
+        val_lbl = wx.StaticText(self, label="0.00")
+        val_lbl.SetForegroundColour(wx.Colour(255, 94, 19))
+        val_lbl.SetFont(
+            wx.Font(
+                18,
+                wx.FONTFAMILY_DEFAULT,
+                wx.FONTSTYLE_NORMAL,
+                wx.FONTWEIGHT_BOLD,
+                False,
+                "Segoe UI"
+            )
+        )
+        sizer.Add(val_lbl, 0, wx.LEFT | wx.RIGHT, 14)
+        sizer.AddSpacer(12)
+        
+        self.SetSizer(sizer)
+
     def _on_paint(self, event):
-        pass
+        dc = wx.AutoBufferedPaintDC(self)
+        gc = wx.GraphicsContext.Create(dc)
+        if not gc:
+            return
+        w, h = self.GetClientSize()
+
+        # Border
+        gc.SetPen(wx.Pen(wx.Colour(43, 49, 61), 1))
+        gc.SetBrush(wx.Brush(wx.Colour(17, 19, 23)))
+        gc.DrawRoundedRectangle(0, 0, w - 1, h, 6)
     
 class TrainingView(wx.Panel):
 
@@ -62,9 +106,12 @@ class TrainingView(wx.Panel):
 
         left_content_sizer = wx.BoxSizer(wx.VERTICAL)
 
+        longitudinal_card = LongitudinalCard(self)
+        left_content_sizer.Add(longitudinal_card, 1, wx.EXPAND | wx.RIGHT, 12)
+
         content_sizer.Add(left_content_sizer, 0, wx.LEFT, 24)
 
 
-        
+        main_sizer.Add(content_sizer, 1, wx.EXPAND)
 
         self.SetSizer(main_sizer)
