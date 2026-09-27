@@ -49,11 +49,6 @@ class MainFrame(wx.Frame):
         if hasattr(self, 'content_book') and 0 <= tab_index < self.content_book.GetPageCount():
             self.content_book.ChangeSelection(tab_index)
 
-    #def OnTabChanged(self, event):
-    #    selected_idx = event.GetInt()
-    #    tab_name = self.sidebar.tabs[selected_idx]['label']
-    #    self.label_title.SetLabel(f"Halaman: {tab_name.upper()}")
-
 if __name__ == '__main__':
     app = wx.App(False)
     frame = MainFrame()
