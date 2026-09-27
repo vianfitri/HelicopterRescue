@@ -36,15 +36,9 @@ class CardStatus(wx.Control):
         # -------------------------------------------------------------
         # 1. GAMBAR BACKGROUND ROUNDED RECTANGLE & BORDER
         # -------------------------------------------------------------
-        gc.SetBrush(gc.CreateBrush(wx.Brush(self.card_bg_color)))
-        
-        if self.border_color:
-            gc.SetPen(gc.CreatePen(wx.GraphicsPenInfo(self.border_color).Width(1)))
-        else:
-            gc.SetPen(wx.NullPen)
-
-        # DrawRoundedRectangle(x, y, width, height, radius)
-        gc.DrawRoundedRectangle(0.5, 0.5, w - 1, h - 1, self.radius)
+        gc.SetBrush(gc.CreateBrush(wx.Brush(wx.Colour(35, 42, 52))))
+        gc.SetPen(wx.NullPen)
+        gc.DrawRoundedRectangle(4, 2, w - 8, h - 4, 6)
 
         # -------------------------------------------------------------
         # 2. SETUP FONT & WARNA TEKS
@@ -55,7 +49,7 @@ class CardStatus(wx.Control):
         # Font untuk Judul Baris 1
         title_font = wx.Font(9, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
         # Font untuk Detail Baris 2
-        content_font = wx.Font(11, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+        content_font = wx.Font(8, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
 
         # Warna Teks
         white_color = wx.Colour(255, 255, 255)
