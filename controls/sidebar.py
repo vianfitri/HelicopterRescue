@@ -7,7 +7,7 @@ class CardStatus(wx.Control):
         super().__init__(
             parent, 
             id=wx.ID_ANY, 
-            style=wx.NO_BORDER | wx.FULL_REPAINT_ON_RESIZE
+            style=wx.NO_BORDER
         )
 
         self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
@@ -178,6 +178,9 @@ class SidebarControl(wx.Panel):
         main_sizer.Add(tabs_sizer, 0, wx.EXPAND)
 
         main_sizer.AddStretchSpacer(1)
+
+        status_card = CardStatus(self)
+        main_sizer.Add(status_card, 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 8)
 
         self.SetSizer(main_sizer)
 
