@@ -11,7 +11,7 @@ class LongitudinalCard(wx.Panel):
         self.SetBackgroundColour(wx.Colour(17, 19, 23))
         self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
         self.SetDoubleBuffered(True)
-        self.SetMinSize((164, -1))
+        self.SetMinSize((232, -1))
 
         self.Bind(wx.EVT_PAINT, self._on_paint)
 
@@ -95,7 +95,7 @@ class HoistCard(wx.Panel):
         self.SetBackgroundColour(wx.Colour(17, 19, 23))
         self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
         self.SetDoubleBuffered(True)
-        self.SetMinSize((232,-1))
+        self.SetMinSize((180,-1))
 
         self.Bind(wx.EVT_PAINT, self._on_paint)
 
