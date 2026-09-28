@@ -11,11 +11,11 @@ class MainFrame(wx.Frame):
             None,
             id=wx.ID_ANY,
             title="Helicopter Rescue Simulator",
-            size=(1366, 768),
+            size=(1720, 768),
             style=wx.DEFAULT_FRAME_STYLE
         )
 
-        self.SetMinSize((1024, 600))
+        self.SetMinSize((1720, 600))
         self.SetBackgroundColour(wx.Colour(17, 19, 23))
         self.Centre()
 

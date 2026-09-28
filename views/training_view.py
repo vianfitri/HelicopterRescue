@@ -1,4 +1,6 @@
 import wx
+
+from assets.theme import Theme
 from controls.horizontal_slider import HorizontalSlider
 
 class LongitudinalCard(wx.Panel):
@@ -21,32 +23,16 @@ class LongitudinalCard(wx.Panel):
         # title label
         title_lbl = wx.StaticText(self, label="LONGITUDINAL POSITION")
         title_lbl.SetForegroundColour(wx.Colour(255, 255, 255))
-        title_lbl.SetFont(
-            wx.Font(
-                8,
-                wx.FONTFAMILY_DEFAULT,
-                wx.FONTSTYLE_NORMAL,
-                wx.FONTWEIGHT_BOLD,
-                False,
-                "Segoe UI"
-            )
-        )
+        title_lbl.SetFont(Theme.get_font(size=8, family=wx.FONTFAMILY_DEFAULT, bold=True))
+
         sizer.Add(title_lbl, 0, wx.LEFT | wx.RIGHT, 14)
         sizer.AddSpacer(14)
 
         # value label and unit
         val_lbl = wx.StaticText(self, label="2.35")
         val_lbl.SetForegroundColour(wx.Colour(255, 94, 19))
-        val_lbl.SetFont(
-            wx.Font(
-                28,
-                wx.FONTFAMILY_DEFAULT,
-                wx.FONTSTYLE_NORMAL,
-                wx.FONTWEIGHT_HEAVY,
-                False,
-                "Segoe UI"
-            )
-        )
+        val_lbl.SetFont(Theme.get_font(size=28, weight=wx.FONTWEIGHT_HEAVY, bold=True))
+
         unit_lbl = wx.StaticText(self, label="m")
         unit_lbl.SetForegroundColour(wx.Colour(255, 94, 19))
         unit_lbl.SetFont(
