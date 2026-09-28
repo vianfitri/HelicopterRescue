@@ -1,4 +1,5 @@
 import wx
+from controls.horizontal_slider import HorizontalSlider
 
 class LongitudinalCard(wx.Panel):
 
@@ -64,6 +65,11 @@ class LongitudinalCard(wx.Panel):
         
         sizer.Add(row_sizer, 0, wx.ALIGN_CENTER | wx.LEFT | wx.RIGHT, 14)
         sizer.AddSpacer(12)
+
+        # Slider Longitudinal
+        longitudinal_slider = HorizontalSlider(self, value=5.0, min_val=0.0, max_val=10.0, size=(-1, 65))
+        sizer.Add(longitudinal_slider, 0, wx.EXPAND | wx.LEFT | wx.RIGHT, 10)
+        sizer.AddSpacer(6)
 
         self.SetSizer(sizer)
 
