@@ -18,9 +18,11 @@ class HorizontalSlider(wx.Control):
         self.padding_x = 20
 
         self.track_bg = wx.Colour(220, 224, 230)
-        self.track_active = wx.Colour(99, 102, 241)     # Modern Indigo
+        #self.track_active = wx.Colour(99, 102, 241)     # Modern Indigo
+        self.track_active = wx.Colour(255, 94, 19)
         self.thumb_color = wx.Colour(255, 255, 255)
-        self.thumb_border = wx.Colour(99, 102, 241)
+        #self.thumb_border = wx.Colour(99, 102, 241)
+        self.thumb_border = wx.Colour(255, 94, 19)
         self.tick_color = wx.Colour(160, 165, 175)
         self.text_color = wx.Colour(100, 110, 120)
 
