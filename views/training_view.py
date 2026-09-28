@@ -62,7 +62,7 @@ class LongitudinalCard(wx.Panel):
         row_sizer.Add(val_lbl, 0, wx.ALIGN_BOTTOM, 0)
         row_sizer.Add(unit_lbl, 0, wx.ALIGN_BOTTOM | wx.LEFT | wx.BOTTOM, 3)
         
-        sizer.Add(row_sizer, 1, wx.ALIGN_CENTER | wx.LEFT | wx.RIGHT, 14)
+        sizer.Add(row_sizer, 0, wx.ALIGN_CENTER | wx.LEFT | wx.RIGHT, 14)
         sizer.AddSpacer(12)
 
         self.SetSizer(sizer)
@@ -142,7 +142,7 @@ class HoistCard(wx.Panel):
         row_sizer.Add(val_lbl, 0, wx.ALIGN_BOTTOM, 0)
         row_sizer.Add(unit_lbl, 0, wx.ALIGN_BOTTOM | wx.LEFT | wx.BOTTOM, 3)
                 
-        sizer.Add(row_sizer, 1, wx.ALIGN_CENTER | wx.LEFT | wx.RIGHT, 14)
+        sizer.Add(row_sizer, 0, wx.ALIGN_CENTER | wx.LEFT | wx.RIGHT, 14)
         sizer.AddSpacer(12)
         
         self.SetSizer(sizer)
@@ -207,7 +207,7 @@ class TrainingView(wx.Panel):
         longitudinal_card = LongitudinalCard(self)
         left_content_sizer.Add(longitudinal_card, 1, wx.EXPAND | wx.RIGHT, 12)
 
-        content_sizer.Add(left_content_sizer, 0, wx.EXPAND | wx.LEFT, 24)
+        content_sizer.Add(left_content_sizer, 0, wx.EXPAND | wx.LEFT | wx.BOTTOM, 24)
 
         panel_view = wx.Panel(self)
         content_sizer.Add(panel_view, 1, wx.EXPAND | wx.LEFT | wx.RIGHT, 6)
@@ -217,7 +217,7 @@ class TrainingView(wx.Panel):
         hoist_card = HoistCard(self)
         right_content_sizer.Add(hoist_card, 1, wx.EXPAND | wx.LEFT, 12)
 
-        content_sizer.Add(right_content_sizer, 0, wx.EXPAND | wx.RIGHT, 24)
+        content_sizer.Add(right_content_sizer, 0, wx.EXPAND | wx.RIGHT | wx.BOTTOM, 24)
 
         main_sizer.Add(content_sizer, 1, wx.EXPAND)
 
