@@ -35,16 +35,8 @@ class LongitudinalCard(wx.Panel):
 
         unit_lbl = wx.StaticText(self, label="m")
         unit_lbl.SetForegroundColour(wx.Colour(255, 94, 19))
-        unit_lbl.SetFont(
-            wx.Font(
-                11,
-                wx.FONTFAMILY_DEFAULT,
-                wx.FONTSTYLE_NORMAL,
-                wx.FONTWEIGHT_HEAVY,
-                False,
-                "Segoe UI"
-            )
-        )
+        unit_lbl.SetFont(Theme.get_font(size=11, family=wx.FONTFAMILY_DEFAULT, weight=wx.FONTWEIGHT_HEAVY))
+        
         row_sizer = wx.BoxSizer(wx.HORIZONTAL)
         row_sizer.Add(val_lbl, 0, wx.ALIGN_BOTTOM, 0)
         row_sizer.Add(unit_lbl, 0, wx.ALIGN_BOTTOM | wx.LEFT | wx.BOTTOM, 3)
