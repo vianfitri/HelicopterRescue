@@ -83,16 +83,7 @@ class HoistCard(wx.Panel):
         # title label
         title_lbl = wx.StaticText(self, label="HOIST LENGTH")
         title_lbl.SetForegroundColour(wx.Colour(255, 255, 255))
-        title_lbl.SetFont(
-            wx.Font(
-                8,
-                wx.FONTFAMILY_DEFAULT,
-                wx.FONTSTYLE_NORMAL,
-                wx.FONTWEIGHT_BOLD,
-                False,
-                "Segoe UI"
-            )
-        )
+        title_lbl.SetFont(Theme.get_font(size=8, family=wx.FONTFAMILY_DEFAULT, bold=True))
 
         sizer.Add(title_lbl, 0, wx.LEFT | wx.RIGHT, 14)
         sizer.AddSpacer(14)
@@ -100,28 +91,12 @@ class HoistCard(wx.Panel):
         # value label and unit
         val_lbl = wx.StaticText(self, label="1.45")
         val_lbl.SetForegroundColour(wx.Colour(45, 147, 226))
-        val_lbl.SetFont(
-            wx.Font(
-                28,
-                wx.FONTFAMILY_DEFAULT,
-                wx.FONTSTYLE_NORMAL,
-                wx.FONTWEIGHT_HEAVY,
-                False,
-                "Segoe UI"
-            )
-        )
+        val_lbl.SetFont(Theme.get_font(size=28, family=wx.FONTFAMILY_DEFAULT, weight=wx.FONTWEIGHT_HEAVY))
+
         unit_lbl = wx.StaticText(self, label="m")
         unit_lbl.SetForegroundColour(wx.Colour(45, 147, 226))
-        unit_lbl.SetFont(
-            wx.Font(
-                11,
-                wx.FONTFAMILY_DEFAULT,
-                wx.FONTSTYLE_NORMAL,
-                wx.FONTWEIGHT_HEAVY,
-                False,
-                "Segoe UI"
-            )
-        )
+        unit_lbl.SetFont(Theme.get_font(size=11, family=wx.FONTFAMILY_DEFAULT, weight=wx.FONTWEIGHT_HEAVY))
+
         row_sizer = wx.BoxSizer(wx.HORIZONTAL)
         row_sizer.Add(val_lbl, 0, wx.ALIGN_BOTTOM, 0)
         row_sizer.Add(unit_lbl, 0, wx.ALIGN_BOTTOM | wx.LEFT | wx.BOTTOM, 3)
@@ -159,14 +134,8 @@ class TrainingView(wx.Panel):
 
         # View Title Section
         header_sizer = wx.BoxSizer(wx.HORIZONTAL)
-        lbl_font = wx.Font(
-            10,
-            wx.FONTFAMILY_SWISS,
-            wx.FONTSTYLE_NORMAL,
-            wx.FONTWEIGHT_BOLD,
-            False,
-            "Segoe UI"
-        )
+        lbl_font = wx.Font(Theme.get_font(size=10, bold=True))
+
         bullet_lbl = wx.StaticText(self, label="●")
         bullet_lbl.SetForegroundColour(wx.Colour(255, 94, 19))
         bullet_lbl.SetFont(lbl_font)
