@@ -15,7 +15,6 @@ class DisplayCanvas(wx.Panel):
         # load base trolley image
         self.img_trolley_ori = wx.Image("assets/images/base_trolley_R.png")
 
-
         # Reference Constants
         self.ref_pixel = 1322
         self.ref_meter = 12
@@ -92,16 +91,16 @@ class DisplayCanvas(wx.Panel):
         if canvas_w > 0 and canvas_h > 0:
             self.scale = canvas_w / 2500.0
 
-            img_base = self.img_base_r_orig.Scale(
-                max(1, int(round(self.img_base_r_orig.GetWidth() * self.scale))),
-                max(1, int(round(self.img_base_r_orig.GetHeight() * self.scale))),
+            img_base = self.img_base_ori.Scale(
+                max(1, int(round(self.img_base_ori.GetWidth() * self.scale))),
+                max(1, int(round(self.img_base_ori.GetHeight() * self.scale))),
                 wx.IMAGE_QUALITY_HIGH  
             )
             self.base_bitmap = wx.Bitmap(img_base)
 
-            img_trolley = self.img_trolley_r_orig.Scale(
-                max(1, int(round(self.img_trolley_r_orig.GetWidth() * self.scale))),
-                max(1, int(round(self.img_trolley_r_orig.GetHeight() * self.scale))),
+            img_trolley = self.img_trolley_ori.Scale(
+                max(1, int(round(self.img_trolley_ori.GetWidth() * self.scale))),
+                max(1, int(round(self.img_trolley_ori.GetHeight() * self.scale))),
                 wx.IMAGE_QUALITY_HIGH
             )
             self.trolley_bitmap = wx.Bitmap(img_trolley)

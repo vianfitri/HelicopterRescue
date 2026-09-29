@@ -132,6 +132,14 @@ class DisplayCard(wx.Panel):
 
         self.Bind(wx.EVT_PAINT, self._on_paint)
 
+        sizer = wx.BoxSizer(wx.VERTICAL)
+
+        # helicopter canvas
+        heli_canvas = DisplayCanvas(self)
+        sizer.Add(heli_canvas, 1, wx.EXPAND | wx.ALL, 10)
+
+        self.SetSizer(sizer)
+
     def _on_paint(self, event):
         dc = wx.AutoBufferedPaintDC(self)
         gc = wx.GraphicsContext.Create(dc)
