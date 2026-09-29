@@ -1,6 +1,7 @@
 import wx
 
 from assets.theme import Theme
+from controls.display_canvas import DisplayCanvas
 from controls.horizontal_slider import HorizontalSlider
 
 class LongitudinalCard(wx.Panel):
@@ -118,6 +119,31 @@ class HoistCard(wx.Panel):
         gc.SetBrush(wx.Brush(wx.Colour(17, 19, 23)))
         gc.DrawRoundedRectangle(0, 0, w - 1, h - 1, 6)
 
+class DisplayCard(wx.Panel):
+    def __init__(self, parent):
+        super().__init__(
+            parent,
+            style=wx.NO_BORDER
+        )
+
+        self.SetBackgroundColour(wx.Colour(17, 19, 23))
+        self.SetBackgroundStyle(wx.BG_STYLE_PAINT)
+        self.SetDoubleBuffered(True)
+
+        self.Bind(wx.EVT_PAINT, self._on_paint)
+
+    def _on_paint(self, event):
+        dc = wx.AutoBufferedPaintDC(self)
+        gc = wx.GraphicsContext.Create(dc)
+        if not gc:
+            return
+
+        w, h = self.GetClientSize()
+
+        # Border
+        gc.SetPen(wx.Pen(wx.Colour(43, 49, 61), 1))
+        gc.SetBrush(wx.Brush(wx.Colour(17, 19, 23)))
+        gc.DrawRoundedRectangle(0, 0, w - 1, h - 1, 6)
 
 class TrainingView(wx.Panel):
 
@@ -151,7 +177,6 @@ class TrainingView(wx.Panel):
         main_sizer.Add(header_sizer, 0, wx.EXPAND)
         main_sizer.AddSpacer(16)
 
-      
         # Content
         content_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
@@ -162,7 +187,7 @@ class TrainingView(wx.Panel):
 
         content_sizer.Add(left_content_sizer, 0, wx.EXPAND | wx.LEFT | wx.BOTTOM, 24)
 
-        panel_view = wx.Panel(self)
+        panel_view = DisplayCanvas(self)
         content_sizer.Add(panel_view, 1, wx.EXPAND | wx.LEFT | wx.RIGHT, 6)
 
         right_content_sizer = wx.BoxSizer(wx.VERTICAL)
