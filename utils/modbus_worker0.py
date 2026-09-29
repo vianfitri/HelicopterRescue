@@ -35,7 +35,8 @@ class ModbusWorker(threading.Thread):
         while self._running:
             try:
                 # Read Holding Register
-                response = self.client.read_holding_registers(
+                #response = self.client.read_holding_registers(
+                response = self.client.read_discrete_inputs(
                     address=self.start_address,
                     count=self.count,
                     slave=self.slave_id
@@ -45,7 +46,9 @@ class ModbusWorker(threading.Thread):
                     wx.CallAfter(self.error_callback, f"Modbus Error: {response}")
                 else:
                     # Send data registers to GUI as thread-safe
-                    wx.CallAfter(self.update_callback, response.registers, "OK")
+                    #wx.CallAfter(self.update_callback, response.registers, "OK")
+                    bits = response.bits[:self.count]
+                    wx.CallAfter(self.update_callback, bits, "OK")
 
             except Exception as e:
                 wx.CallAfter(self.error_callback, f"Connection closed / Error: {str(e)}")
