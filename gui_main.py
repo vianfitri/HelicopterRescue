@@ -114,7 +114,7 @@ class ModbusFrame(wx.Frame):
         if registers is not None:
             #formatted_data = "\n".join([f"Register [{i + int(self.txt_address.GetValue())}]: {val}" for i, val in enumerate(registers)])
             #self.txt_data.SetValue(formatted_data)
-            formatted_data = "\n".join([f"Input X[{i + int(self.text_address.GetValue())}]: {'OFF (0)' if val else 'ON (1)'}" for i, val in enumerate(registers)])
+            formatted_data = "\n".join([f"Input X[{i + int(self.txt_address.GetValue())}]: {'OFF (0)' if val else 'ON (1)'}" for i, val in enumerate(registers)])
             self.txt_data.SetValue(formatted_data)
 
     def on_modbus_error(self, error_msg):
