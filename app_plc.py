@@ -164,7 +164,7 @@ class MainFrame(wx.Frame):
         val.SetForegroundColour(wx.Colour(150, 150, 150)) # Abu-abu saat off/error
         
         hbox.Add(lbl, 1, wx.EXPAND)
-        hbox.Add(val, 0, wx.ALIGN_RIGHT)
+        hbox.Add(val, 0, wx.EXPAND)
         self.ui_elements[key] = val
         return hbox
 
@@ -175,7 +175,7 @@ class MainFrame(wx.Frame):
         val.SetForegroundColour(wx.BLUE)
         
         hbox.Add(lbl, 1, wx.EXPAND)
-        hbox.Add(val, 0, wx.ALIGN_RIGHT)
+        hbox.Add(val, 0, wx.EXPAND)
         self.ui_elements[key] = val
         return hbox
 
