@@ -187,7 +187,7 @@ class TrainingView(wx.Panel):
 
         content_sizer.Add(left_content_sizer, 0, wx.EXPAND | wx.LEFT | wx.BOTTOM, 24)
 
-        panel_view = DisplayCanvas(self)
+        panel_view = DisplayCard(self)
         content_sizer.Add(panel_view, 1, wx.EXPAND | wx.LEFT | wx.RIGHT, 6)
 
         right_content_sizer = wx.BoxSizer(wx.VERTICAL)
