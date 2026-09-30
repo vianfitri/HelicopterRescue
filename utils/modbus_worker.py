@@ -18,10 +18,8 @@ class ModbusDataEvent(wx.PyEvent):
         self.data2 = data2
 
 class ModbusWorkerThread(threading.Thread):
-    def __init__(self, notify_window, config):
+    def __init__(self):
         super().__init__()
-        self.notify_window = notify_window
-        self.config = config
         self.daemon = True
         self.running = True
 
@@ -102,26 +100,26 @@ class ModbusWorkerThread(threading.Thread):
         try:
             # 2 Holding Registers
             hr = client.read_holding_registers(cfg["holding_reg_1"], count=2)
-            read_data["hr1"] = hr.registers[0] if not hr.isError() else "Err"
-            read_data["hr2"] = hr.registers[1] if not hr.isError() else "Err"
+            #read_data["hr1"] = hr.registers[0] if not hr.isError() else "Err"
+            #read_data["hr2"] = hr.registers[1] if not hr.isError() else "Err"
 
             # 2 Coils
             c1 = client.read_coils(cfg["coil_1_addr"], count=1)
             c2 = client.read_coils(cfg["coil_2_addr"], count=1)
-            read_data["coil1"] = (c1.bits[0] if not c1.isError() else False)
-            read_data["coil2"] = (c2.bits[0] if not c2.isError() else False)
+            #read_data["coil1"] = (c1.bits[0] if not c1.isError() else False)
+            #read_data["coil2"] = (c2.bits[0] if not c2.isError() else False)
 
             # 2 Discrete Inputs
             di1 = client.read_discrete_inputs(cfg["di_1_addr"], count=1)
             di2 = client.read_discrete_inputs(cfg["di_2_addr"], count=1)
-            read_data["di1"] = (di1.bits[0] if not di1.isError() else False)
-            read_data["di2"] = (di2.bits[0] if not di2.isError() else False)
+            #read_data["di1"] = (di1.bits[0] if not di1.isError() else False)
+            #read_data["di2"] = (di2.bits[0] if not di2.isError() else False)
 
             # 2 Discrete Outputs
             do1 = client.read_coils(cfg["di_out_1_addr"], count=1)
             do2 = client.read_coils(cfg["di_out_2_addr"], count=1)
-            read_data["do1"] = (do1.bits[0] if not do1.isError() else False)
-            read_data["do2"] = (do2.bits[0] if not do2.isError() else False)
+            #read_data["do1"] = (do1.bits[0] if not do1.isError() else False)
+            #read_data["do2"] = (do2.bits[0] if not do2.isError() else False)
 
         except Exception as e:
             print(f"Error reading server {server_num}: {e}")
