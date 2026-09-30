@@ -2,7 +2,7 @@ import threading
 import time
 import wx
 
-
+from pubsub import pub
 from pymodbus.client import ModbusTcpClient
 
 # Event kustom untuk mengirimkan data dan status ke Thread UI
