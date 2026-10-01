@@ -212,7 +212,7 @@ class ModbusWorkerThread(threading.Thread):
                     wordorder=Endian.LITTLE
                 )
                 read_data["V1032"] = round(decoder.decode_32bit_float(), 2)
-                
+
         except Exception as e:
             self.s1_status = "NOT CONNECTED"
 
@@ -221,6 +221,38 @@ class ModbusWorkerThread(threading.Thread):
 
         return read_data
 
+    def process_plc2(self):
+        cfg = self.config.get("server2")
+        if not cfg or not self._check_connection_limit(2):
+            return None
+
+        if self.client2 is None or not self.client2.is_socket_open():
+            self.client2 = ModbusTcpClient(cfg["ip"], port=cfg.get("port", 502), timeout=1.2)
+            if not self.client2.connect():
+                self.s2_status = "NOT CONNECTED"
+                return None
+
+        self.s2_status = "CONNECTED"
+        self.s2_attempts = 0
+
+        read_data = {}
+        try:
+            # Baca Aux Relay M3008 - M3016 (Modbus FC 01 - Coils)
+            # Haiwell Mapping: M3008 (0x17C0) s/d M3016 (0x17C8) -> Baca 9 bit sekaligus
+            res_m = self.client2.read_coils(address=6080, count=9, slave=1)
+
+            if not res_m.isError():
+                bits = res_m.bits
+                for i, m_addr in enumerate(range(3008, 3017)):
+                    read_data[f"M{m_addr}"] = bits[i]
+
+        except Exception as e:
+            self.s2_status = "NOT CONNECTED"
+
+            if self.client2:
+                self.client2.close()
+
+        return read_data
 
     def stop(self):
         self.running = False
