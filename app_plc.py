@@ -2,6 +2,8 @@ import wx
 import time
 import threading
 from pymodbus.client import ModbusTcpClient
+from pymodbus.constants import Endian
+from pymodbus.payload import BinaryPayloadDecoder
 
 class ModbusWorker(threading.Thread):
     def __init__(self, callback):
@@ -38,23 +40,64 @@ class ModbusWorker(threading.Thread):
                         data["plc1_data"]["x10"] = not rx.bits[3]
 
                     # Baca Y8 - Y11 (Coils, Address 8, count 4) - Logika NC
-                    ry = self.plc1.read_coils(address=1544, count=4, slave=1)
+                    ry = self.plc1.read_coils(address=1536, count=22, slave=1)
                     if not ry.isError():
-                        data["plc1_data"]["y8"] = ry.bits[0]
-                        data["plc1_data"]["y9"] = ry.bits[1]
-                        data["plc1_data"]["y10"] = ry.bits[2]
-                        data["plc1_data"]["y11"] = ry.bits[3]
+                        data["plc1_data"]["y0"] = ry.bits[0] # FWD
+                        data["plc1_data"]["y1"] = ry.bits[1] # REV
+                        data["plc1_data"]["y2"] = ry.bits[2]
+                        data["plc1_data"]["y3"] = ry.bits[3]
+                        data["plc1_data"]["y4"] = ry.bits[4]
+                        data["plc1_data"]["y5"] = ry.bits[5]
+                        data["plc1_data"]["y6"] = ry.bits[6]
+                        data["plc1_data"]["y7"] = ry.bits[7]
+                        data["plc1_data"]["y8"] = ry.bits[8]
+                        data["plc1_data"]["y9"] = ry.bits[9]
+                        data["plc1_data"]["y10"] = ry.bits[10]
+                        data["plc1_data"]["y11"] = ry.bits[11]
+                        data["plc1_data"]["y12"] = ry.bits[12]
+                        data["plc1_data"]["y13"] = ry.bits[13]
+                        data["plc1_data"]["y14"] = ry.bits[14]
+                        data["plc1_data"]["y15"] = ry.bits[15]
+                        data["plc1_data"]["y16"] = ry.bits[16]
+                        data["plc1_data"]["y17"] = ry.bits[17]
+                        data["plc1_data"]["y18"] = ry.bits[18]
+                        data["plc1_data"]["y19"] = ry.bits[19]
+                        data["plc1_data"]["y20"] = ry.bits[20]
+                        data["plc1_data"]["y21"] = ry.bits[21]
+
+                    # Baca M Register
+                    rm = self.plc1.read_coils(address=(1102+3072), count=2, slave=1)
+                    if not rm.isError():
+                        data["plc1_data"]["m1102"] = rm.bits[0]
+                        data["plc1_data"]["m1103"] = rm.bits[1]
+
+                    rm = self.plc1.read_coils(address=(22+3072), count=2, slave=1)
+                    if not rm.isError():
+                        data["plc1_data"]["m22"] = rm.bits[0]
+                        data["plc1_data"]["m23"] = rm.bits[1]
 
                     # Baca Holding Registers (V32, V102, V1004)
-                    rv32 = self.plc1.read_holding_registers(address=(512+32), count=1, slave=1)
-                    rv102 = self.plc1.read_holding_registers(address=(512+102), count=1, slave=1)
+                    rv32 = self.plc1.read_holding_registers(address=(512+32), count=2, slave=1)
                     rv124 = self.plc1.read_holding_registers(address=(512+124), count=1, slave=1)
                     rv1004 = self.plc1.read_holding_registers(address=(512+1004), count=1, slave=1)
+                    rv1544 = self.plc1.read_holding_registers(address=1544, count=2, slave=1)
                     
-                    if not rv32.isError(): data["plc1_data"]["v32"] = rv32.registers[0]
-                    if not rv102.isError(): data["plc1_data"]["v102"] = rv102.registers[0]
+                    if not rv32.isError():
+                        decoder = BinaryPayloadDecoder.fromRegisters(
+                            rv32.registers,
+                            byteorder=Endian.BIG,
+                            wordorder=Endian.LITTLE
+                        )
+                        data["plc1_data"]["v32"] = round(decoder.decode_32bit_float(), 2)
                     if not rv124.isError(): data["plc1_data"]["v124"] = rv124.registers[0]
                     if not rv1004.isError(): data["plc1_data"]["v1004"] = rv1004.registers[0]
+                    if not rv1544.isError():
+                        decoder = BinaryPayloadDecoder.fromRegisters(
+                            rv1544.registers,
+                            byteorder=Endian.BIG,
+                            wordorder=Endian.LITTLE
+                        )
+                        data["plc1_data"]["v1544"] = round(decoder.decode_32bit_float(), 2)
                 except Exception as e:
                     print("Error reading PLC 1:", e)
             else:
@@ -66,7 +109,7 @@ class ModbusWorker(threading.Thread):
             if self.plc2.connect():
                 data["plc2_connected"] = True
                 try:
-                    ry = self.plc2.read_coils(address=1542, count=10, slave=1)
+                    ry = self.plc2.read_coils(address=1542, count=10, slave=1) #1536+6=1542
                     if not ry.isError():
                         data["plc2_data"]["y6"] = ry.bits[0]
                         data["plc2_data"]["y7"] = ry.bits[1]
@@ -75,8 +118,8 @@ class ModbusWorker(threading.Thread):
                         data["plc2_data"]["y10"] = ry.bits[4]
                         data["plc2_data"]["y11"] = ry.bits[5]
                         data["plc2_data"]["y12"] = ry.bits[6]
-                        data["plc2_data"]["y14"] = ry.bits[7]
-                        data["plc2_data"]["y15"] = ry.bits[8]
+                        data["plc2_data"]["y14"] = ry.bits[8]
+                        data["plc2_data"]["y15"] = ry.bits[9]
 
                     # Baca M3008 - M3016 (Coils, Address 3008, count 9) - Asumsi NO (Normal)
                     rm = self.plc2.read_coils(address=6080, count=9, slave=1)
@@ -134,8 +177,9 @@ class MainFrame(wx.Frame):
         plc1_bools = [
             ("x7", "LS FWD 1 (X7, NC)"), ("x8", "LS FWD 2 (X8, NC)"),
             ("x9", "LS REV 1 (X9, NC)"), ("x10", "LS REV 2 (X10, NC)"),
-            ("y8", "Indikator FWD (Y8)"), ("y9", "Indikator REV (Y9)"),
-            ("y10", "Hoist UP (Y10)"), ("y11", "Hoist DOWN (Y11)")
+            ("y0", "Y0"), ("y1","Y1"),
+            ("m1102", "Hoist UP (M1102)"),("m1103","Hoist DOWN (M1103)"),
+            ("m22", "Forward (M22)"),("m23", "Reverse (M23)")
         ]
         
         for key, label in plc1_bools:
@@ -144,7 +188,7 @@ class MainFrame(wx.Frame):
         vbox1.Add(wx.StaticLine(panel), 0, wx.EXPAND | wx.ALL, 10)
         
         # Daftar Value PLC 1
-        plc1_vals = [("v32", "RPM Value (V32)"), ("v102", "LOAD Value (V102)"), ("v124", "Hoist Travel Value (V124)"), ("v1004", "Travel Value (V1004)")]
+        plc1_vals = [("v32", "RPM Value (V32)"), ("v124", "Hoist Travel Value (V124)"), ("v1004", "Travel Value (V1004)"), ("v1544", "LOAD Value (V1544)")]
         for key, label in plc1_vals:
             vbox1.Add(self.create_value_row(panel, key, label), 0, wx.EXPAND | wx.ALL, 5)
 
