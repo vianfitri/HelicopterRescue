@@ -95,7 +95,7 @@ class ModbusWorker(threading.Thread):
                             byteorder=Endian.BIG,
                             wordorder=Endian.LITTLE
                         )
-                        data["plc1_data"]["v124"] = decoder.decode_32bit_int()
+                        data["plc1_data"]["v124"] = decoder.decode_32bit_uint()
                     if not rv1004.isError(): 
                         decoder = BinaryPayloadDecoder.fromRegisters(
                             rv1004.registers,
