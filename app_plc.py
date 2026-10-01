@@ -78,9 +78,9 @@ class ModbusWorker(threading.Thread):
 
                     # Baca Holding Registers (V32, V102, V1004)
                     rv32 = self.plc1.read_holding_registers(address=(512+32), count=2, slave=1)
-                    rv124 = self.plc1.read_holding_registers(address=(512+124), count=1, slave=1)
-                    rv1004 = self.plc1.read_holding_registers(address=(512+1004), count=1, slave=1)
-                    rv1544 = self.plc1.read_holding_registers(address=1544, count=2, slave=1)
+                    rv124 = self.plc1.read_holding_registers(address=(512+124), count=2, slave=1)
+                    rv1004 = self.plc1.read_holding_registers(address=(512+1004), count=2, slave=1)
+                    rv1032 = self.plc1.read_holding_registers(address=(512+1032), count=2, slave=1)
                     
                     if not rv32.isError():
                         decoder = BinaryPayloadDecoder.fromRegisters(
@@ -89,11 +89,23 @@ class ModbusWorker(threading.Thread):
                             wordorder=Endian.LITTLE
                         )
                         data["plc1_data"]["v32"] = round(decoder.decode_32bit_float(), 2)
-                    if not rv124.isError(): data["plc1_data"]["v124"] = rv124.registers[0]
-                    if not rv1004.isError(): data["plc1_data"]["v1004"] = rv1004.registers[0]
-                    if not rv1544.isError():
+                    if not rv124.isError(): 
                         decoder = BinaryPayloadDecoder.fromRegisters(
-                            rv1544.registers,
+                            rv124.registers,
+                            byteorder=Endian.BIG,
+                            wordorder=Endian.LITTLE
+                        )
+                        data["plc1_data"]["v124"] = decoder.decode_32bit_int
+                    if not rv1004.isError(): 
+                        decoder = BinaryPayloadDecoder.fromRegisters(
+                            rv1004.registers,
+                            byteorder=Endian.BIG,
+                            wordorder=Endian.LITTLE
+                        )
+                        data["plc1_data"]["v1004"] = rv1004.registers[0]
+                    if not rv1032.isError():
+                        decoder = BinaryPayloadDecoder.fromRegisters(
+                            rv1032.registers,
                             byteorder=Endian.BIG,
                             wordorder=Endian.LITTLE
                         )
