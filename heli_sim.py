@@ -29,12 +29,12 @@ ADDR_V1032 = 1544  # LOAD INDICATOR (Float32, 2 registers: 1544-1545)
 
 # Helper konversi data ke 2 register 16-bit Big Endian
 def pack_float32(value: float) -> list[int]:
-    builder = BinaryPayloadBuilder(byteorder=Endian.BIG, wordorder=Endian.BIG)
+    builder = BinaryPayloadBuilder(byteorder=Endian.BIG, wordorder=Endian.LITTLE)
     builder.add_32bit_float(value)
     return builder.to_registers()
 
 def pack_uint32(value: int) -> list[int]:
-    builder = BinaryPayloadBuilder(byteorder=Endian.BIG, wordorder=Endian.BIG)
+    builder = BinaryPayloadBuilder(byteorder=Endian.BIG, wordorder=Endian.LITTLE)
     builder.add_32bit_uint(value)
     return builder.to_registers()
 
@@ -92,18 +92,18 @@ async def simulation_loop(context: ModbusServerContext):
         context[slave_id].setValues(3, ADDR_V32, pack_float32(sim_state.rpm))
 
         # 2. LOGIKA SIMULASI HOIST (0 - 100)
-        if sim_state.hoist_cmd == "up":
+        if sim_state.hoist_cmd == "down":
             if sim_state.hoist_pos < 100:
                 sim_state.hoist_pos += 1
-            context[slave_id].setValues(1, ADDR_M1102, [True])   # M1102 ON
-            context[slave_id].setValues(1, ADDR_M1103, [False])  # M1103 OFF
+            context[slave_id].setValues(1, ADDR_M1103, [True])   # M1102 ON
+            context[slave_id].setValues(1, ADDR_M1102, [False])  # M1103 OFF
             sim_state.load = random.uniform(100.0, 300.0)
 
-        elif sim_state.hoist_cmd == "down":
+        elif sim_state.hoist_cmd == "up":
             if sim_state.hoist_pos > 0:
                 sim_state.hoist_pos -= 1
-            context[slave_id].setValues(1, ADDR_M1102, [False])  # M1102 OFF
-            context[slave_id].setValues(1, ADDR_M1103, [True])   # M1103 ON
+            context[slave_id].setValues(1, ADDR_M1103, [False])  # M1102 OFF
+            context[slave_id].setValues(1, ADDR_M1102, [True])   # M1103 ON
             sim_state.load = random.uniform(100.0, 300.0)
 
         else:
