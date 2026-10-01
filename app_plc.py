@@ -102,7 +102,7 @@ class ModbusWorker(threading.Thread):
                             byteorder=Endian.BIG,
                             wordorder=Endian.LITTLE
                         )
-                        data["plc1_data"]["v1004"] = rv1004.registers[0]
+                        data["plc1_data"]["v1004"] = decoder.decode_32bit_int
                     if not rv1032.isError():
                         decoder = BinaryPayloadDecoder.fromRegisters(
                             rv1032.registers,
