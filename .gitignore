@@ -1,3 +1,5 @@
+modbus_config.json
+
 **/__pycache__/
 
 *.pyc
@@ -6,5 +8,3 @@
 
 venv/
 .venv/
-
-modbus_config.json
