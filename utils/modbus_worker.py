@@ -7,18 +7,6 @@ from pymodbus.client import ModbusTcpClient
 from pymodbus.payload import BinaryPayloadDecoder
 from pymodbus.constants import Endian
 
-# Event kustom untuk mengirimkan data dan status ke Thread UI
-EVT_MODBUS_DATA_ID = wx.NewIdRef()
-
-class ModbusDataEvent(wx.PyEvent):
-    def __init__(self, status1, data1, status2, data2):
-        super().__init__()
-        self.SetEventType(EVT_MODBUS_DATA_ID)
-        self.status1 = status1  # 'CONNECTED', 'CONNECTING', 'NOT CONNECTED'
-        self.data1 = data1
-        self.status2 = status2
-        self.data2 = data2
-
 class ModbusWorkerThread(threading.Thread):
     def __init__(self, config=None):
         super().__init__()
