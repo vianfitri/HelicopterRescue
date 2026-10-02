@@ -1,5 +1,7 @@
 import wx
 
+from pubsub import pub
+
 class DisplayCanvas(wx.Panel):
     def __init__(self, parent):
         super().__init__(parent)
@@ -44,6 +46,12 @@ class DisplayCanvas(wx.Panel):
         self.Bind(wx.EVT_LEFT_DOWN, self.on_mouse_down)
         self.Bind(wx.EVT_MOTION, self.on_mouse_move)
         self.Bind(wx.EVT_LEFT_UP, self.on_mouse_up)
+
+        # Safe cleanup ketika komponen dihancurkan
+        self.Bind(wx.EVT_WINDOW_DESTROY, self.on_destroy)
+
+        # subscribe data plc1
+        pub.subscribe(self.on_plc1_data, "modbus.data.plc1")
 
     def calculate_positions_from_trackbar(self, scale):
         """Menghitung posisi X Helicopter & Trolley berdasarkan nilai Trackbar (0..100)."""
@@ -358,5 +366,12 @@ class DisplayCanvas(wx.Panel):
 
         self.draw_trackbar(gc)
 
-        
+    # event subscribe plc 1 data
+    def on_plc1_data(self, data):
+        travel_val = data.get("V1004", 0)
+        self.trackbar_value = travel_val
 
+    def on_destroy(self, event):
+        # Unsubscribe agar tidak memicu memory leak
+        pub.unsubscribe(self.on_plc1_data, "modbus.data.plc1")
+        event.Skip()
