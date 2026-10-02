@@ -128,7 +128,7 @@ class Plc1WorkerThread(BasePlcWorker):
             if not res_v124.isError():
                 # Dekode UINT 32-bit
                 raw = struct.pack('>HH', res_v124.registers[1], res_v124.registers[0])
-                read_data["V124"] = struct.unpack('<I', raw)[0]
+                read_data["V124"] = struct.unpack('>I', raw)[0]
 
             # 6. OPTIMASI BATCH: Gabung V1004 (addr 1516) & V1032 (addr 1544) dalam 1 Request
             # Rentang 1516 ke 1545 = 30 register. Memangkas 1 network request terpisah.
@@ -138,7 +138,7 @@ class Plc1WorkerThread(BasePlcWorker):
                 
                 # V1004 (Indeks 0 & 1 dalam buffer batch)
                 raw_v1004 = struct.pack('>HH', regs[1], regs[0])
-                read_data["V1004"] = struct.unpack('<I', raw_v1004)[0]
+                read_data["V1004"] = struct.unpack('>I', raw_v1004)[0]
 
                 # V1032 (Indeks 28 & 29 dalam buffer batch -> 1544 - 1516 = 28)
                 raw_v1032 = struct.pack('>HH', regs[29], regs[28])

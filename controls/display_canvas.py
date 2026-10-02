@@ -368,8 +368,19 @@ class DisplayCanvas(wx.Panel):
 
     # event subscribe plc 1 data
     def on_plc1_data(self, data):
-        travel_val = data.get("V1004", 0)
-        self.trackbar_value = travel_val
+        def _update():
+            if "V1004" in data:
+                travel_val = data["V1004"]
+                self.trackbar_value = max(0, min(100, float(travel_val)))
+
+                # 3. Hitung ulang koordinat posisi X helicopter & trolley berdasarkan skala
+                if hasattr(self, 'scale'):
+                    self.calculate_positions_from_trackbar(self.scale)
+                
+                # 4. Picu render ulang canvas
+                self.Refresh(False)
+
+        wx.CallAfter(_update)
 
     def on_destroy(self, event):
         # Unsubscribe agar tidak memicu memory leak

@@ -1,7 +1,7 @@
 import wx
 import config
 
-from utils.modbus_worker import ModbusWorkerThread
+from utils.modbus_worker_thread import ModbusManager
 from controls.sidebar import SidebarControl
 from controls.title_bar import TitleBarControl
 from views.training_view import TrainingView
@@ -30,8 +30,8 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_CLOSE, self.on_close)
 
         # Inisialisasi & jalankan Worker Thread
-        self.worker = ModbusWorkerThread(self.config)
-        self.worker.start()
+        self.modbus_mgr = ModbusManager(config=self.config, polling_interval=0.1)
+        self.modbus_mgr.start()
 
     def _init_ui(self):
         # root panel
@@ -74,7 +74,7 @@ class MainFrame(wx.Frame):
             self.content_book.ChangeSelection(tab_index)
 
     def on_close(self, event):
-        self.worker.stop()
+        self.modbus_mgr.stop()
         self.Destroy()
     
 if __name__ == '__main__':
