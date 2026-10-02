@@ -1,5 +1,7 @@
 import wx
+import config
 
+from utils.modbus_worker import ModbusWorkerThread
 from controls.sidebar import SidebarControl
 from controls.title_bar import TitleBarControl
 from views.training_view import TrainingView
@@ -19,7 +21,17 @@ class MainFrame(wx.Frame):
         self.SetBackgroundColour(wx.Colour(17, 19, 23))
         self.Centre()
 
+        # Load Config File
+        self.config = config.load_config()
+
         self._init_ui()
+
+        # Bind event
+        self.Bind(wx.EVT_CLOSE, self.on_close)
+
+        # Inisialisasi & jalankan Worker Thread
+        self.worker = ModbusWorkerThread(self.config)
+        self.worker.start()
 
     def _init_ui(self):
         # root panel
@@ -61,6 +73,10 @@ class MainFrame(wx.Frame):
         if hasattr(self, 'content_book') and 0 <= tab_index < self.content_book.GetPageCount():
             self.content_book.ChangeSelection(tab_index)
 
+    def on_close(self, event):
+        self.worker.stop()
+        self.Destroy()
+    
 if __name__ == '__main__':
     app = wx.App(False)
     frame = MainFrame()

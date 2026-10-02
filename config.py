@@ -5,40 +5,12 @@ CONFIG_FILE = "modbus_config.json"
 
 DEFAULT_CONFIG = {
     "server1": {
-        "ip": "127.0.0.1",
-        "port": 502,
-        "holding_reg_1": 0,
-        "holding_reg_2": 1,
-        "coil_1_addr": 0,
-        "coil_1_default": "NO",
-        "coil_2_addr": 1,
-        "coil_2_default": "NO",
-        "di_1_addr": 0,
-        "di_1_default": "NO",
-        "di_2_addr": 1,
-        "di_2_default": "NO",
-        "di_out_1_addr": 0,
-        "di_out_1_default": "NO",
-        "di_out_2_addr": 1,
-        "di_out_2_default": "NO",
+        "ip": "192.168.1.121",
+        "port": 502
     },
     "server2": {
-        "ip": "127.0.0.1",
-        "port": 503,
-        "holding_reg_1": 0,
-        "holding_reg_2": 1,
-        "coil_1_addr": 0,
-        "coil_1_default": "NO",
-        "coil_2_addr": 1,
-        "coil_2_default": "NO",
-        "di_1_addr": 0,
-        "di_1_default": "NO",
-        "di_2_addr": 1,
-        "di_2_default": "NO",
-        "di_out_1_addr": 0,
-        "di_out_1_default": "NO",
-        "di_out_2_addr": 1,
-        "di_out_2_default": "NO",
+        "ip": "192.168.1.111",
+        "port": 502
     }
 }
 
