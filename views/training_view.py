@@ -1,5 +1,6 @@
 import wx
 
+from pubsub import pub
 from assets.theme import Theme
 from controls.display_canvas import DisplayCanvas
 from controls.horizontal_slider import HorizontalSlider
@@ -17,6 +18,9 @@ class LongitudinalCard(wx.Panel):
         self.SetMinSize((232, -1))
 
         self.Bind(wx.EVT_PAINT, self._on_paint)
+
+        # subscribe data plc1
+        pub.subscribe(self.on_plc1_data, "modbus.data.plc1")
 
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.AddSpacer(12)
