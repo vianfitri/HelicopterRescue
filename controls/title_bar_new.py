@@ -38,7 +38,7 @@ class TitleBarControl(wx.Panel):
         title_lbl = wx.StaticText(self, label="HELICOPTER RESCUE SIMULATOR")
         title_lbl.SetForegroundColour(wx.Colour(255, 255, 255))
         title_lbl.SetFont(
-            wx.Font(10, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Segoe UI")
+            wx.Font(12, wx.FONTFAMILY_SWISS, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, False, "Segoe UI")
         )
         sizer.Add(title_lbl, 0, wx.ALIGN_CENTER_VERTICAL | wx.LEFT, 10)
 
