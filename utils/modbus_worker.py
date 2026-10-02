@@ -64,7 +64,7 @@ class ModbusWorkerThread(threading.Thread):
             # Publish payload data spesifik jika polling berhasil
             if data1 is not None:
                 pub.sendMessage("modbus.data.plc1", data=data1)
-                print(data1["V1004"])
+                #print(data1["V1004"])
 
             if data2 is not None:
                 pub.sendMessage("modbus.data.plc2", data=data2)
