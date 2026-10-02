@@ -140,10 +140,10 @@ class ModbusWorkerThread(threading.Thread):
             if not res_x.isError():
                 bits = res_x.bits
                 read_data.update({
-                    "X7": bits[0],
-                    "X8": bits[1],
-                    "X9": bits[2],
-                    "X10": bits[3]
+                    "X7": not bits[0],
+                    "X8": not bits[1],
+                    "X9": not bits[2],
+                    "X10": not bits[3]
                 })
 
             # 2. Baca Digital Output Y (Modbus Function Code 01 - Coils)
