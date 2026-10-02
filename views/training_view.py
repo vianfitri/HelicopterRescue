@@ -4,139 +4,7 @@ from pubsub import pub
 from assets.theme import Theme
 from controls.display_canvas import DisplayCanvas
 from controls.horizontal_slider import HorizontalSlider
-
-class VerticalSlider(wx.Panel):
-
-    def __init__(
-        self,
-        parent,
-        value=0.0,
-        min_val=0.0,
-        max_val=100.0,
-        size=(40, 180),
-        active_color=wx.Colour(45, 147, 226),
-    ):
-        super().__init__(
-            parent, size=size, style=wx.NO_BORDER | wx.BG_STYLE_PAINT
-        )
-        self.SetDoubleBuffered(True)
-
-        self._min_val = float(min_val)
-        self._max_val = float(max_val)
-        self._value = float(value)
-        self._active_color = active_color
-        self._track_color = wx.Colour(32, 38, 48)
-        self._thumb_color = wx.Colour(255, 255, 255)
-
-        self._is_dragging = False
-
-        self.Bind(wx.EVT_PAINT, self._on_paint)
-        self.Bind(wx.EVT_LEFT_DOWN, self._on_mouse_down)
-        self.Bind(wx.EVT_LEFT_UP, self._on_mouse_up)
-        self.Bind(wx.EVT_MOTION, self._on_mouse_move)
-
-    def SetValue(self, val):
-        # Transisi dan pembatasan nilai 0 - 100
-        self._value = max(self._min_val, min(self._max_val, float(val)))
-        self.Refresh()
-
-    def GetValue(self):
-        return self._value
-
-    def _val_to_y(self, val, track_top, track_height):
-        # Pergerakan dari ATAS (min_val = 0) ke BAWAH (max_val = 100)
-        norm = (val - self._min_val) / (self._max_val - self._min_val)
-        return track_top + norm * track_height
-
-    def _y_to_val(self, y, track_top, track_height):
-        norm = (y - track_top) / track_height
-        norm = max(0.0, min(1.0, norm))
-        return self._min_val + norm * (self._max_val - self._min_val)
-
-    def _get_layout_bounds(self):
-        w, h = self.GetClientSize()
-        thumb_radius = 8
-        track_w = 6
-        track_x = (w - track_w) / 2
-        track_top = thumb_radius + 4
-        track_bottom = h - thumb_radius - 4
-        track_height = max(1, track_bottom - track_top)
-        return (
-            w,
-            h,
-            track_x,
-            track_top,
-            track_w,
-            track_height,
-            thumb_radius,
-        )
-
-    def _on_paint(self, event):
-        dc = wx.AutoBufferedPaintDC(self)
-        gc = wx.GraphicsContext.Create(dc)
-        if not gc:
-            return
-
-        (
-            w,
-            h,
-            track_x,
-            track_top,
-            track_w,
-            track_height,
-            thumb_radius,
-        ) = self._get_layout_bounds()
-
-        # Canvas background (sesuai warna card parent)
-        gc.SetBrush(wx.Brush(wx.Colour(17, 19, 23)))
-        gc.DrawRectangle(0, 0, w, h)
-
-        # 1. Base Track (Rounded Rectangle background)
-        gc.SetPen(wx.NullPen)
-        gc.SetBrush(wx.Brush(self._track_color))
-        gc.DrawRoundedRectangle(
-            track_x, track_top, track_w, track_height, track_w / 2
-        )
-
-        # 2. Active Track Fill (dari atas ke posisi thumb)
-        thumb_y = self._val_to_y(self._value, track_top, track_height)
-        active_h = thumb_y - track_top
-        if active_h > 0:
-            gc.SetBrush(wx.Brush(self._active_color))
-            gc.DrawRoundedRectangle(
-                track_x, track_top, track_w, active_h, track_w / 2
-            )
-
-        # 3. Bulat Thumb (Knob)
-        gc.SetBrush(wx.Brush(self._thumb_color))
-        gc.SetPen(wx.Pen(self._active_color, 2))
-        gc.DrawEllipse(
-            w / 2 - thumb_radius,
-            thumb_y - thumb_radius,
-            thumb_radius * 2,
-            thumb_radius * 2,
-        )
-
-    def _on_mouse_down(self, event):
-        self._is_dragging = True
-        self.CaptureMouse()
-        self._update_from_mouse(event.GetPosition())
-
-    def _on_mouse_up(self, event):
-        if self.HasCapture():
-            self.ReleaseMouse()
-        self._is_dragging = False
-
-    def _on_mouse_move(self, event):
-        if self._is_dragging and event.Dragging():
-            self._update_from_mouse(event.GetPosition())
-
-    def _update_from_mouse(self, pos):
-        _, _, _, track_top, _, track_height, _ = (
-            self._get_layout_bounds()
-        )
-        new_val = self._y_to_val(pos.y, track_top, track_height)
-        self.SetValue(new_val)
+from controls.vertical_slider import VerticalSlider
 
 class LongitudinalCard(wx.Panel):
 
@@ -262,12 +130,11 @@ class HoistCard(wx.Panel):
             value=0.0,
             min_val=0.0,
             max_val=100.0,
-            size=(-1, 120),
-            active_color=wx.Colour(45, 147, 226),
+            size=(-1, 300),
         )
         sizer.Add(
             self.hoist_slider,
-            1,
+            0,
             wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM,
             10,
         )
