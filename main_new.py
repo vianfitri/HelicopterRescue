@@ -21,7 +21,7 @@ class MainFrame(wx.Frame):
         self.Center()
 
         main_panel = wx.Panel(self)
-        main_panel.SetBackgroundColour(wx.Colour(8, 16, 25))
+        main_panel.SetBackgroundColour(wx.Colour(5, 11, 20))
 
         # 1. TITLEBAR (Height: 70px)
         self.titlebar = TitleBarControl(main_panel)

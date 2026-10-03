@@ -101,12 +101,12 @@ class LeftCardContent(wx.Panel):
         super().__init__(parent)
         
         # Samakan warna background induk
-        self.SetBackgroundColour(wx.Colour(23, 34, 50))
+        self.SetBackgroundColour(wx.Colour(8, 16, 25))
         
         main_sizer = wx.BoxSizer(wx.VERTICAL)
         
         # Skema Warna
-        CARD_BG = wx.Colour(18, 28, 42)        # Sedikit lebih gelap agar terlihat kontras
+        CARD_BG = wx.Colour(14, 25, 38)        # Sedikit lebih gelap agar terlihat kontras
         CARD_BORDER = wx.Colour(42, 60, 84)    # Border 1px subtle
         
         # Data 5 Card
