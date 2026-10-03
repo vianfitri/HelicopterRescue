@@ -36,6 +36,22 @@ class Theme:
     STATUS_WARN     = wx.Colour(255, 184, 0)    # #FFB800 - Caution / Amber
     STATUS_ALERT    = wx.Colour(255, 42, 0)     # #FF2A00 - Emergency / Cut Cable / Alert
 
+    # =========================================================================
+    # HELPER FONTS
+    # =========================================================================
+    @staticmethod
+    def FontTitle():
+        return wx.Font(9, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+
+    @staticmethod
+    def FontBody():
+        return wx.Font(8, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL)
+
+    @staticmethod
+    def FontTelemetry():
+        """Font Monospace untuk angka/koordinat agar tidak bergeser saat update real-time"""
+        return wx.Font(9, wx.FONTFAMILY_TELETYPE, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD)
+    
     @staticmethod
     def get_font(size=10, weight=wx.FONTWEIGHT_NORMAL, family=wx.FONTFAMILY_SWISS, bold=False):
         """Creates a modern Segoe UI font or system fallback."""
