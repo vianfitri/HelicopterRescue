@@ -1,6 +1,8 @@
 import datetime
 import wx
 
+from assets.theme import Theme
+
 class TitleBarControl(wx.Panel):
     def __init__(self, parent):
         # Set tinggi fixed 46px
@@ -10,7 +12,7 @@ class TitleBarControl(wx.Panel):
         self.SetMaxSize((-1, 60))
         
         # Background utama panel
-        self.bg_color = wx.Colour(8, 16, 25)
+        self.bg_color = Theme.BG_TITLEBAR
         self.SetBackgroundColour(self.bg_color)
         
         # Timer untuk jam UTC
