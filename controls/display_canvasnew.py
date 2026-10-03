@@ -41,6 +41,11 @@ class DisplayCanvas(wx.Panel):
         self.trackbar_value = 0
         self.is_dragging_trackbar = False
 
+        # Variabel Garis Vertikal Dinamis
+        self.vertical_line_length = 50  # Panjang garis awal (dalam piksel terskala / unit)
+        self.heli_ref_offset_x = 200    # Offset X acuan relatif dari pojok kiri gambar heli
+        self.heli_ref_offset_y = 100    # Offset y acuan relatif dari pojok atas gambar heli
+
         # Calculated positions
         self.bg_x, self.bg_y = 0, 0
         self.heli_x, self.heli_y = 0, 0
@@ -254,6 +259,28 @@ class DisplayCanvas(wx.Panel):
         self.Refresh(False)
 
     # =======================================================
+    # RENDERING GARIS VERTIKAL
+    # =======================================================
+    def draw_vertical_line(self, gc):
+        """Menggambar garis vertikal yang menempel pada titik tertentu di Helikopter."""
+        if not self.heli_bitmap or not self.heli_bitmap.IsOk():
+            return
+
+        scale = getattr(self, 'scale', 1.0)
+
+        # Hitung titik awal X & Y berdasarkan offset posisi helikopter
+        start_x = self.heli_x + int(round(self.heli_ref_offset_x * scale))
+        start_y = self.heli_y + int(round(self.heli_ref_offset_y * scale))
+
+        # Hitung titik akhir Y berdasarkan panjang garis terskala
+        scaled_line_len = int(round(self.vertical_line_length * scale))
+        end_y = start_y + scaled_line_len
+
+        # Atur style garis (warna merah, ketebalan 2px)
+        gc.SetPen(wx.Pen(wx.Colour(255, 0, 0), 2))
+        gc.StrokeLine(start_x, start_y, start_x, end_y)
+
+    # =======================================================
     # RENDERING
     # =======================================================
     def draw_trackbar(self, gc):
@@ -305,6 +332,7 @@ class DisplayCanvas(wx.Panel):
                 self.trolley_bitmap.GetWidth(), self.trolley_bitmap.GetHeight()
             )
 
+        self.draw_vertical_line(gc)
         self.draw_trackbar(gc)
 
     def on_plc1_data(self, data):
