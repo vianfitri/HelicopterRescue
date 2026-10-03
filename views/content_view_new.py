@@ -4,19 +4,22 @@ class ContentView(wx.ScrolledWindow):
     def __init__(self, parent):
         super().__init__(parent, style=wx.VSCROLL)
         
-        # Kecepatan scroll vertikal (0 = no horizontal scroll, 20px per scroll step)
+        # Kecepatan scroll vertikal (0 = no horizontal scroll, 20px per step)
         self.SetScrollRate(0, 20)
         
-        # Samakan warna background dengan tema gelap simulator
+        # Tema warna background utama dashboard (Dark Blue Slate)
         self.SetBackgroundColour(wx.Colour(14, 23, 36))
         
         self._init_ui()
+        
+        # Event binding agar layout merekomputasi scrollbar saat di-resize
+        self.Bind(wx.EVT_SIZE, self._on_size)
 
     def _init_ui(self):
         main_sizer = wx.BoxSizer(wx.VERTICAL)
 
         # =========================================================
-        # 1. AREA ATAS: TITLE PAGE (Lebar Memenuhi Screen/Page)
+        # 1. AREA ATAS: TITLE PAGE (Lebar Memenuhi Content View)
         # =========================================================
         self.title_panel = wx.Panel(self)
         self.title_panel.SetBackgroundColour(wx.Colour(20, 31, 46))
@@ -26,13 +29,13 @@ class ContentView(wx.ScrolledWindow):
         self.page_title = wx.StaticText(self.title_panel, label="RESCUE MISSION DASHBOARD")
         self.page_title.SetForegroundColour(wx.Colour(255, 255, 255))
         self.page_title.SetFont(wx.Font(12, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
-               
-        title_sizer.Add(self.page_title, 0, wx.BOTTOM, 4)
-
+        
+        # Inner padding di dalam title panel (12px top/bottom, 16px left)
+        title_sizer.Add(self.page_title, 0, wx.ALL, 12)
         self.title_panel.SetSizer(title_sizer)
 
-        # Tambahkan Title Panel ke Main Sizer (Lebar Penuh)
-        main_sizer.Add(self.title_panel, 0, wx.EXPAND | wx.ALL, 20)
+        # Disamakan margin luar: Left=20px, Right=20px, Top=20px, Bottom=15px
+        main_sizer.Add(self.title_panel, 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.TOP | wx.BOTTOM, 20)
 
         # =========================================================
         # 2. AREA BAWAH: 3 HORIZONTAL COLUMNS
@@ -50,7 +53,8 @@ class ContentView(wx.ScrolledWindow):
         left_sizer = wx.BoxSizer(wx.VERTICAL)
         left_label = wx.StaticText(self.left_card, label="LEFT CONTROL CARD\n(Width: 280px)")
         left_label.SetForegroundColour(wx.Colour(180, 200, 220))
-        left_sizer.Add(left_label, 0, wx.RIGHT, 16)
+        # Inner padding 16px di dalam card
+        left_sizer.Add(left_label, 0, wx.ALL, 16)
         self.left_card.SetSizer(left_sizer)
 
         # ---------------------------------------------------------
@@ -78,18 +82,22 @@ class ContentView(wx.ScrolledWindow):
         right_sizer = wx.BoxSizer(wx.VERTICAL)
         right_label = wx.StaticText(self.right_card, label="RIGHT TELEMETRY CARD\n(Width: 280px)")
         right_label.SetForegroundColour(wx.Colour(180, 200, 220))
-        right_sizer.Add(right_label, 0, wx.LEFT, 16)
+        # Inner padding 16px di dalam card
+        right_sizer.Add(right_label, 0, wx.ALL, 16)
         self.right_card.SetSizer(right_sizer)
 
-        # Tambahkan ketiga area ke Horizontal Body Sizer
+        # Jarak horizontal antar-kolom (Gap = 20px)
         horizontal_body_sizer.Add(self.left_card, 0, wx.EXPAND | wx.RIGHT, 20)
         horizontal_body_sizer.Add(self.canvas_panel, 1, wx.EXPAND)
         horizontal_body_sizer.Add(self.right_card, 0, wx.EXPAND | wx.LEFT, 20)
 
-        # Masukkan area horizontal ke Main Sizer
-        main_sizer.Add(horizontal_body_sizer, 1, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 16)
+        # Masukkan area horizontal ke Main Sizer (Margin luar Left/Right/Bottom = 20px)
+        main_sizer.Add(horizontal_body_sizer, 1, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 20)
 
         self.SetSizer(main_sizer)
-        
-        # Memastikan wx.ScrolledWindow menghitung total tinggi konten agar scrollbar aktif
         self.FitInside()
+
+    def _on_size(self, event):
+        self.Layout()
+        self.FitInside()
+        event.Skip()
