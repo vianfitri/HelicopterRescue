@@ -3,6 +3,8 @@ import wx
 from controls.title_bar_new import TitleBarControl
 from controls.sidebar_new import SidebarControl
 
+from views.content_view_new import ContentView
+
 class MainFrame(wx.Frame):
     def __init__(self):
         target_width = 1720
@@ -29,11 +31,7 @@ class MainFrame(wx.Frame):
 
         # 3. KONTEN AREA (Menggunakan wx.ScrolledWindow)
         # =========================================================
-        self.content_panel = wx.ScrolledWindow(main_panel, style=wx.VSCROLL)
-        self.content_panel.SetScrollRate(0, 20) # Kecepatan scroll vertikal (0 = no horiz, 20px per step)
-        self.content_panel.SetBackgroundColour(wx.Colour(14, 23, 36)) # Match tema gelap simulator
-
-        self._build_demo_content()
+        self.content_panel = ContentView(main_panel)
 
         # Layout Sizers
         body_sizer = wx.BoxSizer(wx.HORIZONTAL)
@@ -49,29 +47,6 @@ class MainFrame(wx.Frame):
     def _on_sidebar_tab_changed(self, tab_index: int):
         # Callback saat tab di sidebar diklik
         print(f"Sidebar active tab switched to index: {tab_index}")
-
-    def _build_demo_content(self):
-        content_sizer = wx.BoxSizer(wx.VERTICAL)
-
-        header_text = wx.StaticText(self.content_panel, label="RESCUE MISSION DASHBOARD")
-        header_text.SetForegroundColour(wx.Colour(255, 255, 255))
-        header_text.SetFont(wx.Font(14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
-        content_sizer.Add(header_text, 0, wx.ALL, 20)
-
-        for i in range(1, 25):
-            card = wx.Panel(self.content_panel, size=(-1, 50))
-            card.SetBackgroundColour(wx.Colour(23, 32, 48) if i % 2 == 0 else wx.Colour(18, 26, 38))
-
-            card_sizer = wx.BoxSizer(wx.HORIZONTAL)
-            label = wx.StaticText(card, label=f"Item / Form Input / Card Ke-{i}")
-            label.SetForegroundColour(wx.Colour(200, 210, 220))
-            card_sizer.Add(label, 0, wx.ALL | wx.ALIGN_CENTER_VERTICAL, 10)
-            card.SetSizer(card_sizer)
-
-            content_sizer.Add(card, 0, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 12)
-
-        self.content_panel.SetSizer(content_sizer)
-        self.content_panel.FitInside()
 
 if __name__ == "__main__":
     app = wx.App(False)
