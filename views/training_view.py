@@ -2,7 +2,7 @@ import wx
 
 from pubsub import pub
 from assets.theme import Theme
-from controls.display_canvas import DisplayCanvas
+from controls.display_canvasnew import DisplayCanvas
 from controls.horizontal_slider import HorizontalSlider
 from controls.vertical_slider import VerticalSlider
 

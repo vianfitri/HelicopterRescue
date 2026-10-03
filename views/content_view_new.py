@@ -10,7 +10,8 @@ class ContentView(wx.ScrolledWindow):
         self.SetScrollRate(0, 20)
         
         # Tema warna background utama dashboard (Dark Blue Slate)
-        self.SetBackgroundColour(wx.Colour(14, 23, 36))
+        #self.SetBackgroundColour(wx.Colour(14, 23, 36))
+        self.SetBackgroundColour(wx.Colour(8, 16, 25))
         
         self._init_ui()
         
@@ -24,7 +25,8 @@ class ContentView(wx.ScrolledWindow):
         # 1. AREA ATAS: TITLE PAGE (Lebar Memenuhi Content View)
         # =========================================================
         self.title_panel = wx.Panel(self)
-        self.title_panel.SetBackgroundColour(wx.Colour(20, 31, 46))
+        self.title_panel.SetBackgroundColour(wx.Colour(8, 16, 25))
+        #self.title_panel.SetBackgroundColour(wx.Colour(20, 31, 46))
         
         title_sizer = wx.BoxSizer(wx.VERTICAL)
         
@@ -50,7 +52,8 @@ class ContentView(wx.ScrolledWindow):
         self.left_card = wx.Panel(self)
         self.left_card.SetMinSize((280, 850))
         self.left_card.SetMaxSize((280, -1))
-        self.left_card.SetBackgroundColour(wx.Colour(23, 34, 50))
+        self.left_card.SetBackgroundColour(wx.Colour(8, 16, 25))
+        #self.left_card.SetBackgroundColour(wx.Colour(23, 34, 50))
         
         left_sizer = wx.BoxSizer(wx.VERTICAL)
 
@@ -65,7 +68,7 @@ class ContentView(wx.ScrolledWindow):
         # ---------------------------------------------------------
         self.canvas_panel = wx.Panel(self)
         self.canvas_panel.SetMinSize((-1, 850))
-        self.canvas_panel.SetBackgroundColour(wx.Colour(8, 14, 22))
+        self.canvas_panel.SetBackgroundColour(wx.Colour(8, 16, 25))
         
         canvas_sizer = wx.BoxSizer(wx.VERTICAL)
         canvas_label = wx.StaticText(self.canvas_panel, label="CENTER CONTENT CANVAS\n(Flexible Width)")

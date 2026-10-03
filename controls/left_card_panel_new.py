@@ -5,8 +5,9 @@ class RoundedCardPanel(wx.Panel):
     Panel Card kustom dengan Rounded Corners (radius 6px), Border 1px,
     Background transparan/menyatu, serta Line Shadow pembatas Title.
     """
-    def __init__(self, parent, title="", bg_color=wx.Colour(23, 34, 50), border_color=wx.Colour(40, 58, 82), radius=6):
+    def __init__(self, parent, title="", bg_color=wx.Colour(8, 16, 25), border_color=wx.Colour(40, 58, 82), radius=6):
         super().__init__(parent)
+
         self.SetBackgroundStyle(wx.BG_STYLE_PAINT)  # Cegah flickering saat repaint
         
         self.card_bg_color = bg_color
@@ -41,9 +42,18 @@ class RoundedCardPanel(wx.Panel):
         
         # Event binding untuk custom drawing (Border, Rounded Corner & Line Shadow)
         self.Bind(wx.EVT_PAINT, self._on_paint)
+        self.Bind(wx.EVT_ERASE_BACKGROUND, self._on_erase_background)
+
+    def _on_erase_background(self, event):
+        # mencegah OS membersihkan background dengan warna default (putih/grey bawaan)
+        pass
 
     def _on_paint(self, event):
         dc = wx.AutoBufferedPaintDC(self)
+
+        # 2. Ambil warna background asli dari induk (parent) agar area sudut menyatu
+        parent_bg = self.GetParent().GetBackgroundColour()
+        dc.SetBackground(wx.Brush(parent_bg))
         dc.Clear()
         
         gc = wx.GraphicsContext.Create(dc)
