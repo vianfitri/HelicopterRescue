@@ -42,9 +42,9 @@ class DisplayCanvas(wx.Panel):
         self.is_dragging_trackbar = False
 
         # Variabel Garis Vertikal Dinamis
-        self.vertical_line_length = 50  # Panjang garis awal (dalam piksel terskala / unit)
-        self.heli_ref_offset_x = 200    # Offset X acuan relatif dari pojok kiri gambar heli
-        self.heli_ref_offset_y = 100    # Offset y acuan relatif dari pojok atas gambar heli
+        self.vertical_line_length = 100  # Panjang garis awal (dalam piksel terskala / unit)
+        self.heli_ref_offset_x = 1000    # Offset X acuan relatif dari pojok kiri gambar heli
+        self.heli_ref_offset_y = 350     # Offset y acuan relatif dari pojok atas gambar heli
 
         # Calculated positions
         self.bg_x, self.bg_y = 0, 0
