@@ -25,18 +25,14 @@ class ContentView(wx.ScrolledWindow):
         
         self.page_title = wx.StaticText(self.title_panel, label="RESCUE MISSION DASHBOARD")
         self.page_title.SetForegroundColour(wx.Colour(255, 255, 255))
-        self.page_title.SetFont(wx.Font(14, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
-        
-        self.page_subtitle = wx.StaticText(self.title_panel, label="Real-time telemetry, spatial canvas, and control panels")
-        self.page_subtitle.SetForegroundColour(wx.Colour(140, 160, 185))
-        self.page_subtitle.SetFont(wx.Font(9, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
-        
+        self.page_title.SetFont(wx.Font(12, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
+               
         title_sizer.Add(self.page_title, 0, wx.BOTTOM, 4)
-        title_sizer.Add(self.page_subtitle, 0, wx.ALL, 0)
+
         self.title_panel.SetSizer(title_sizer)
 
         # Tambahkan Title Panel ke Main Sizer (Lebar Penuh)
-        main_sizer.Add(self.title_panel, 0, wx.EXPAND | wx.ALL, 16)
+        main_sizer.Add(self.title_panel, 0, wx.EXPAND | wx.ALL, 20)
 
         # =========================================================
         # 2. AREA BAWAH: 3 HORIZONTAL COLUMNS
@@ -54,7 +50,7 @@ class ContentView(wx.ScrolledWindow):
         left_sizer = wx.BoxSizer(wx.VERTICAL)
         left_label = wx.StaticText(self.left_card, label="LEFT CONTROL CARD\n(Width: 280px)")
         left_label.SetForegroundColour(wx.Colour(180, 200, 220))
-        left_sizer.Add(left_label, 0, wx.ALL, 16)
+        left_sizer.Add(left_label, 0, wx.RIGHT, 16)
         self.left_card.SetSizer(left_sizer)
 
         # ---------------------------------------------------------
@@ -68,7 +64,7 @@ class ContentView(wx.ScrolledWindow):
         canvas_label = wx.StaticText(self.canvas_panel, label="CENTER CONTENT CANVAS\n(Flexible Width)")
         canvas_label.SetForegroundColour(wx.Colour(0, 200, 255))
         canvas_label.SetFont(wx.Font(11, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
-        canvas_sizer.Add(canvas_label, 0, wx.ALL | wx.ALIGN_CENTER, 20)
+        canvas_sizer.Add(canvas_label, 0, wx.ALL | wx.ALIGN_CENTER, 16)
         self.canvas_panel.SetSizer(canvas_sizer)
 
         # ---------------------------------------------------------
@@ -82,13 +78,13 @@ class ContentView(wx.ScrolledWindow):
         right_sizer = wx.BoxSizer(wx.VERTICAL)
         right_label = wx.StaticText(self.right_card, label="RIGHT TELEMETRY CARD\n(Width: 280px)")
         right_label.SetForegroundColour(wx.Colour(180, 200, 220))
-        right_sizer.Add(right_label, 0, wx.ALL, 16)
+        right_sizer.Add(right_label, 0, wx.LEFT, 16)
         self.right_card.SetSizer(right_sizer)
 
         # Tambahkan ketiga area ke Horizontal Body Sizer
-        horizontal_body_sizer.Add(self.left_card, 0, wx.EXPAND | wx.RIGHT, 12)
+        horizontal_body_sizer.Add(self.left_card, 0, wx.EXPAND | wx.RIGHT, 20)
         horizontal_body_sizer.Add(self.canvas_panel, 1, wx.EXPAND)
-        horizontal_body_sizer.Add(self.right_card, 0, wx.EXPAND | wx.LEFT, 12)
+        horizontal_body_sizer.Add(self.right_card, 0, wx.EXPAND | wx.LEFT, 20)
 
         # Masukkan area horizontal ke Main Sizer
         main_sizer.Add(horizontal_body_sizer, 1, wx.EXPAND | wx.LEFT | wx.RIGHT | wx.BOTTOM, 16)
