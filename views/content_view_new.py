@@ -1,5 +1,7 @@
 import wx
 
+from controls.left_card_panel_new import LeftCardContent
+
 class ContentView(wx.ScrolledWindow):
     def __init__(self, parent):
         super().__init__(parent, style=wx.VSCROLL)
@@ -51,10 +53,11 @@ class ContentView(wx.ScrolledWindow):
         self.left_card.SetBackgroundColour(wx.Colour(23, 34, 50))
         
         left_sizer = wx.BoxSizer(wx.VERTICAL)
-        left_label = wx.StaticText(self.left_card, label="LEFT CONTROL CARD\n(Width: 280px)")
-        left_label.SetForegroundColour(wx.Colour(180, 200, 220))
-        # Inner padding 16px di dalam card
-        left_sizer.Add(left_label, 0, wx.ALL, 16)
+
+        # Menambahkan Card
+        left_content = LeftCardContent(self.left_card)
+        left_sizer.Add(left_content, 1, wx.EXPAND | wx.ALL, 12)
+
         self.left_card.SetSizer(left_sizer)
 
         # ---------------------------------------------------------
