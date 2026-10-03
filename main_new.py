@@ -1,5 +1,6 @@
 import wx
 
+from assets.theme import Theme
 from controls.title_bar_new import TitleBarControl
 from controls.sidebar_new import SidebarControl
 
@@ -21,7 +22,7 @@ class MainFrame(wx.Frame):
         self.Center()
 
         main_panel = wx.Panel(self)
-        main_panel.SetBackgroundColour(wx.Colour(5, 11, 20))
+        main_panel.SetBackgroundColour(Theme.BG_APP)
 
         # 1. TITLEBAR (Height: 70px)
         self.titlebar = TitleBarControl(main_panel)
