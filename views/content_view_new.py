@@ -28,7 +28,7 @@ class ContentView(wx.ScrolledWindow):
         
         self.page_title = wx.StaticText(self.title_panel, label="RESCUE MISSION DASHBOARD")
         self.page_title.SetForegroundColour(wx.Colour(255, 255, 255))
-        self.page_title.SetFont(wx.Font(12, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
+        self.page_title.SetFont(wx.Font(11, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD))
         
         # Inner padding di dalam title panel (12px top/bottom, 16px left)
         title_sizer.Add(self.page_title, 0, wx.ALL, 12)
