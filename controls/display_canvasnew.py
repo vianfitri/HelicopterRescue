@@ -10,7 +10,7 @@ class DisplayCanvas(wx.Panel):
         # PRESET SKALA BACKGROUND & POSISI ACUAN (REFERENCE)
         self.bg_scale_preset = 2.8 
         self.ref_bg_x = -450  # Posisi acuan X (bisa bernilai negatif)
-        self.ref_bg_y = -30  # Posisi acuan Y (bisa bernilai negatif)
+        self.ref_bg_y = 0  # Posisi acuan Y (bisa bernilai negatif)
 
         # load background image
         self.bg_image = wx.Image("assets/images/background.png")
